@@ -8,6 +8,7 @@ Description
 The software acts as a platform for food lovers to find their nearest food truck and retrieve information of menu & available timings of the truck. The platform would also be an easy way for the food truck owners to let the people know their available cuisines every day and analyse and improvise their food serves based on the reviews by their customers.
 
 Significance
+
 • It would reduce the effort of individual in finding the right food truck at their convenience (like a truck on their way to office).
 • The platform would be a great way for the food truck owners to post their updates about location, time and menu which may improve their customer traffic.
 • The platform would also have a calendar for the food lovers for the upcoming food festivals at various locations.
