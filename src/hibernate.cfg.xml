@@ -1,0 +1,16 @@
+<hibernate-configuration>
+	<session-factory>
+
+		<property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+
+		<property name="hibernate.connection.url">jdbc:postgresql://explorefoodtrucks.c5rdsiue8ak6.us-east-2.rds.amazonaws.com:5432/explorefoodtrucks</property>
+		<property name="hibernate.connection.username">team3_admin</property>
+		<property name="hibernate.connection.password">team3_password</property>
+		<property name="show_sql">true</property>
+
+
+		<mapping class="com.albany.foodOnWheels.User"/>
+		<mapping class="com.albany.foodOnWheels.FoodTruckOwner"/>
+	</session-factory>
+</hibernate-configuration>
