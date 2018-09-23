@@ -36,17 +36,17 @@
 
       <div class="easyBox full">
 
-        <h4 class="hdr5"><span>Sign up for Food Truck Owner</span></h4>
+        <h4 class="hdr5"><span>Sign up User</span></h4>
 		<form class="simpleForm" action="${pageContext.request.contextPath}/Signup.do" method="post">
            <fieldset>
         <div class="row nomargin">
           <div class="col-md-5">
-            <h4 class="hdr2 special">Food Truck Information</h4>
+            <h4 class="hdr2 special">User Information</h4>
 
             
                 <div class="form-group">
-                  <label>Food Truck name</label>
-                  <input type="text" required class="form-control" name="user_name" placeholder="enter food truck name">
+                  <label>User name</label>
+                  <input type="text" required class="form-control" name="user_name" placeholder="enter user name">
                 </div>
                  <div class="form-group">
                   <label>First name</label>
@@ -76,10 +76,21 @@
                   <label>Address Line 1</label>
                   <input type="text" required class="form-control" name="address1" placeholder="enter your  address 1">
                 </div>
-                <div class="form-group">
+                
+                
+              
+
+          </div>
+          <div class="col-md-2">
+          </div>
+          <div class="col-md-5">
+            	<div class="space50px"></div>
+				<div class="form-group">
                   <label>Address Line 2</label>
                   <input type="text"  class="form-control" name="address2" placeholder="enter your  address 2">
                 </div>
+		
+           
                 <div class="form-group">
                   <label>City</label>
                   <input type="text" required class="form-control" name="city" placeholder="enter your  city">
@@ -94,75 +105,22 @@
                 </div>
                 <div class="form-group">
                   <label>Phone</label>
-                   <input type="tel" placeholder="123-456-7890"  required class="form-control" name="phone" >
+                   <input type="tel" placeholder="1234567890"
+            required class="form-control" name="phone" placeholder="enter your phone">
                 </div>
-        
-          </div>
-          <div class="col-md-2">
-          </div>
-          <div class="col-md-5">
-            
-
-			<div class="space50px"></div>
-			<div class="space50px"></div>
-           
            	<div class="form-group">
                   <label>Email</label>
                    <input type="email" required class="form-control" name="email" placeholder="enter your email">
                 </div>
            
-                <div class="form-group">
-                	<label>Cuisine</label>
-	                <input type="checkbox" name="cuisine" value="Mexican">Mexican<br>      
-	                <input type="checkbox" name="cuisine" value="Chinese">Chinese<br>      
-	                <input type="checkbox" name="cuisine" value="Japanese">Japanese<br> 
-	                <input type="checkbox" name="cuisine" value="Thai">Thai<br> 
-	                <input type="checkbox" name="cuisine" value="American">American<br> 
-	                <input type="checkbox" name="cuisine" value="Fast_food">Fast Food<br> 
-	                <input type="checkbox" name="cuisine" value="Indian">Indian<br>  
-	             </div>
-                
-                <div class="form-group">
-                	<label>Days</label>
-	                <input type="checkbox" name="days" value="Monday">Monday<br>      
-	                <input type="checkbox" name="days" value="Tuesday">Tuesday<br>      
-	                <input type="checkbox" name="days" value="Wednesday">Wednesday<br> 
-	                <input type="checkbox" name="days" value="Thursday">Thursday<br> 
-	                <input type="checkbox" name="days" value="Friday">Friday<br> 
-	                <input type="checkbox" name="days" value="Saturday">Saturday<br> 
-	                <input type="checkbox" name="days" value="Sunday">Sunday<br>  
-	             </div>
-                <div class="form-group">
-                  <label>Week Day Time</label>
-                  <input type="text" required class="form-control" name="week_day" placeholder="enter your weekday timings">
-                </div>
-                <div class="form-group">
-                  <label>Week End Time</label>
-                  <input type="text" required class="form-control" name="week_end" placeholder="enter your weekend timings">
-                </div>
-                <div class="form-group">
-                  <label>Accepted Payments</label>
-                  <input type="checkbox" name="payment" value="Monday">Cash<br>      
-	                <input type="checkbox" name="payment" value="Tuesday">Debit Card<br>      
-	                <input type="checkbox" name="payment" value="Wednesday">Credit Card<br> 
-                </div>
-                
-                
-                
-              
-            <div class="successMsg" style="display:none;">
-               Your e-mail has been added to our list!
-            </div>
-            <div class="errorMsg" style="display:none;">
-              Error, please try again later.
-            </div>
+               
 
             
-			<input type="hidden" name ="register" value="truck"/>
+			<input type="hidden" name ="register" value="user"/>
             
 
             <input class="btn btn-default" type="submit" value="Submit">
-            <div>
+			<div>
 				Already have a profile?  <a href="${pageContext.request.contextPath}/jsps/login.jsp">Login</a>  
 			</div>
           </div>
@@ -175,8 +133,7 @@
     </div>
   </div>
 </div>
-
-
+Already have a profile? <a href="${pageContext.request.contextPath}/jsps/signup.jsp">Login</a>  
 <!-- bg-1 -->
 
 

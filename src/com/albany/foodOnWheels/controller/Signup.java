@@ -29,14 +29,14 @@ public class Signup extends HttpServlet {
      */
     public Signup() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -44,11 +44,10 @@ public class Signup extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("here");
-		// TODO Auto-generated method stub
+		
 		String register = request.getParameter("register");
 		User user=new User();
-		user.setUser_name(request.getParameter("truck_name"));
+		user.setUser_name(request.getParameter("user_name"));
 		user.setFirstname(request.getParameter("first_name"));
 		user.setLastname(request.getParameter("last_name"));
 		user.setPassword(request.getParameter("password"));
@@ -58,7 +57,7 @@ public class Signup extends HttpServlet {
 		user.setState(request.getParameter("state"));
 		user.setZipcode(Integer.parseInt(request.getParameter("zipcode")));
 		user.setPhone(request.getParameter("phone"));
-		user.setRole("truck_owner");
+		
 		user.setEmail("email");
 		
 		
@@ -84,6 +83,8 @@ public class Signup extends HttpServlet {
 			truck_owner.setAddress_line_1(request.getParameter("address1"));
 			truck_owner.setAddress_line_2(request.getParameter("address2"));
 			
+			user.setRole("truck_owner");
+			
 			Configuration config = new Configuration();
 			config.addAnnotatedClass(com.albany.foodOnWheels.model.User.class);
 			config.addAnnotatedClass(com.albany.foodOnWheels.model.FoodTruckOwner.class);
@@ -95,6 +96,22 @@ public class Signup extends HttpServlet {
 			
 			session.save(user);
 			session.save(truck_owner);
+			session.getTransaction().commit();
+			session.close();
+			
+		}
+		else if(register.equals("user")) {
+			user.setRole("user");
+			Configuration config = new Configuration();
+			config.addAnnotatedClass(com.albany.foodOnWheels.model.User.class);
+			
+			config.configure();
+			ServiceRegistry servReg = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
+			SessionFactory factory = config.buildSessionFactory(servReg);
+			Session session = factory.openSession();
+			session.beginTransaction();
+			
+			session.save(user);
 			session.getTransaction().commit();
 			session.close();
 			

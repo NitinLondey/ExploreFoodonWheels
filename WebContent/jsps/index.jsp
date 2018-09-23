@@ -20,6 +20,15 @@
 
 <!-- ***************** -->
 <!-- ** THREE BOXES ** -->
+<%if((request.getAttribute("message")!=null))
+      {
+    	  %>
+      <div class="errorMsg">
+              <%= request.getAttribute("message") %>
+	</div>
+      <%
+		request.setAttribute("message", null);
+	} %>
 <div class="row nomargin threeBoxes" id="location">
   <div class="col-md-4 col-sm-4">
 

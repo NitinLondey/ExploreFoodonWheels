@@ -38,7 +38,22 @@
           <li><a href="11_gallery.html">Gallery</a></li>
           
           <li><a href="12_contact.html">Contact</a></li>
-          <li><a href="${pageContext.request.contextPath}/jsps/signup.jsp">Signup / Login</a></li>
+          <%if(request.getSession().getAttribute("user_name")==null)
+				{%>
+					<li class="dropdown active"> 
+          <a  class="dropdown-toggle">Sign up</a>
+	          <ul class="dropdown-menu">
+	          	<li><a href="${pageContext.request.contextPath}/jsps/signup.jsp">Signup as Food - Truck</a></li>
+	          	<li><a href="${pageContext.request.contextPath}/jsps/signup-user.jsp">Signup as User</a></li>
+	          </ul>
+          	
+        </li>
+				 <% } else{ %>
+					 <li><a href="${pageContext.request.contextPath}/Logout.do">Logout</a></li>
+				 <%  }
+				 
+				 %>
+          
         </ul>
       </div>
       <!-- /.navbar-collapse -->
