@@ -38,8 +38,7 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -63,18 +62,26 @@ public class Login extends HttpServlet {
 					.add(Restrictions.eq("user_name", user.getUser_name()))
 					.add(Restrictions.eq("password", user.getPassword()))
 					.list();
-			tx.commit();
+			System.out.println(userList.size());
 			if(userList.size()> 0) {
 				User loggedin=  userList.get(0);
+				
 				httpSession.setAttribute("user_name", loggedin.getUser_name());
 				httpSession.setAttribute("role", loggedin.getRole());
 				httpSession.setAttribute("zipcode", loggedin.getZipcode());
 				request.setAttribute("message", "Login successful ! Welcome"+ loggedin.getUser_name());
-				request.getRequestDispatcher("/jsps/index.jsp").forward(request, response);
+				
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/HomePage");
+				dispatcher.forward(request, response);
+				return;	
+				
+				
 			}
 			else {
+				System.out.println("else");
 				request.setAttribute("message", "Login failed ! Incorrect User name or Password");
-				request.getRequestDispatcher("/jsps/login.jsp").forward(request, response);
+				request.getRequestDispatcher("/jsps/login.jsp").include(request, response);
+				
 			}
 			
 					

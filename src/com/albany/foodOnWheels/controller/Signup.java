@@ -16,6 +16,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import com.albany.foodOnWheels.model.FoodTruckOwner;
 import com.albany.foodOnWheels.model.User;
+import com.services.Connection;
 
 /**
  * Servlet implementation class Signup
@@ -84,14 +85,9 @@ public class Signup extends HttpServlet {
 			truck_owner.setAddress_line_2(request.getParameter("address2"));
 			
 			user.setRole("truck_owner");
-			
-			Configuration config = new Configuration();
-			config.addAnnotatedClass(com.albany.foodOnWheels.model.User.class);
-			config.addAnnotatedClass(com.albany.foodOnWheels.model.FoodTruckOwner.class);
-			config.configure();
-			ServiceRegistry servReg = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
-			SessionFactory factory = config.buildSessionFactory(servReg);
-			Session session = factory.openSession();
+
+			SessionFactory sessionFactory = Connection.getSessionFactory();
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			
 			session.save(user);
@@ -102,13 +98,8 @@ public class Signup extends HttpServlet {
 		}
 		else if(register.equals("user")) {
 			user.setRole("user");
-			Configuration config = new Configuration();
-			config.addAnnotatedClass(com.albany.foodOnWheels.model.User.class);
-			
-			config.configure();
-			ServiceRegistry servReg = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
-			SessionFactory factory = config.buildSessionFactory(servReg);
-			Session session = factory.openSession();
+			SessionFactory sessionFactory = Connection.getSessionFactory();
+			Session session = sessionFactory.openSession();
 			session.beginTransaction();
 			
 			session.save(user);
