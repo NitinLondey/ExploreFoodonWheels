@@ -22,8 +22,8 @@
 <!-- ** THREE BOXES ** -->
 <%if((request.getAttribute("message")!=null))
       {
-    	  %>
-      <div class="errorMsg">
+ %>
+    <div class="errorMsg">
               <%= request.getAttribute("message") %>
 	</div>
       <%

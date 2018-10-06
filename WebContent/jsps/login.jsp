@@ -19,7 +19,11 @@
 
 
  <%@include file="/jsps/navigation.jsp" %>
-
+<%if(request.getSession().getAttribute("user_name")!=null)
+      { 
+	response.sendRedirect(request.getContextPath()+ "/jsps/index.jsp");
+	return;
+  		} %>
 <%if((request.getAttribute("message")!=null))
       {
     	  %>

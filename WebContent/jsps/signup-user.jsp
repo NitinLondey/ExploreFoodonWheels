@@ -133,7 +133,7 @@
     </div>
   </div>
 </div>
-Already have a profile? <a href="${pageContext.request.contextPath}/jsps/signup.jsp">Login</a>  
+  
 <!-- bg-1 -->
 
 
