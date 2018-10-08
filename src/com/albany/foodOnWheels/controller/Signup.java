@@ -59,7 +59,7 @@ public class Signup extends HttpServlet {
 		user.setZipcode(Integer.parseInt(request.getParameter("zipcode")));
 		user.setPhone(request.getParameter("phone"));
 		
-		user.setEmail("email");
+		user.setEmail(request.getParameter("email"));
 		
 		
 		if(register.equals("truck")) {

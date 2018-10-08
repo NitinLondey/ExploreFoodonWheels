@@ -43,18 +43,18 @@
           <div class="col-md-5">
             <h4 class="hdr2 special">Food Truck Information</h4>
 
-            
+            <p style="color:yellow; font-weight: 900">${FBname } <br/> ${msg }</p>
                 <div class="form-group">
                   <label>Food Truck name</label>
                   <input type="text" required class="form-control" name="user_name" placeholder="enter food truck name">
                 </div>
                  <div class="form-group">
                   <label>First name</label>
-                  <input type="text" required class="form-control" name="first_name" placeholder="enter your first name">
+                  <input type="text" required class="form-control" name="first_name" value="${user.firstname }" placeholder="enter your first name">
                 </div>
                  <div class="form-group">
                   <label>Last name</label>
-                  <input type="text" required class="form-control" name="last_name" placeholder="enter your last name">
+                  <input type="text" required class="form-control" name="last_name" value="${user.lastname }" placeholder="enter your last name">
                 </div>
                 <div class="form-group">
                   <label>Password</label>
@@ -104,11 +104,16 @@
             
 
 			<div class="space50px"></div>
-			<div class="space50px"></div>
+			<div>
+				<jsp:include page="/jsps/fbsignup.jsp">
+				<jsp:param value="TruckOwner" name="UserType"/>
+				</jsp:include>
+			</div>
+			<div class="space25px" style="height:43px"></div>
            
            	<div class="form-group">
                   <label>Email</label>
-                   <input type="email" required class="form-control" name="email" placeholder="enter your email">
+                   <input type="email" required class="form-control" name="email" value="${user.email }" placeholder="enter your email">
                 </div>
            
                 <div class="form-group">

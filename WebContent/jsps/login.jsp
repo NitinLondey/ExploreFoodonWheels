@@ -49,20 +49,30 @@
 		<form class="simpleForm" action="${pageContext.request.contextPath}/Login.do" method="post">
            <fieldset>
         <div class="row nomargin">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <h4 class="hdr2 special">Login</h4>
-
-            
+		  </div>
+		  <div class="col-md-6">
+            	<div style="text-align:center" >
+				<%@include file="/jsps/fblogin.jsp" %>
+				</div>
+		  </div>
+		</div>
+		<div class="row nomargin">
+          <div class="col-md-12">
                 <div class="form-group">
                   <label>User name</label>
-                  <input type="text" required class="form-control" name="user_name" placeholder="enter food truck name">
+                  <input type="text" required class="form-control" name="user_name" value="${user.user_name }" placeholder="enter food truck name">
                 </div>
                
                 <div class="form-group">
                   <label>Password</label>
-                  <input type="password" id ="psw" class="form-control" name="password" placeholder="enter your password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                  <input type="password" id ="psw" class="form-control" name="password" value="${user.password }" placeholder="enter your password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                 </div>
                 <input class="btn btn-default" type="submit" value="Submit">
+                <div>
+                <p style="color:yellow;font-size:20; font-weight: 900"> ${msg }</p>
+                </div>
           </div>
           
           </div>
