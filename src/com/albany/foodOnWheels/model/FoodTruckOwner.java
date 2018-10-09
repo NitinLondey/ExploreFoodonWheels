@@ -1,10 +1,13 @@
 package com.albany.foodOnWheels.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity
@@ -12,7 +15,7 @@ import javax.persistence.Table;
 
 public class FoodTruckOwner {
 	@Id
-	
+	@Column(name="truck_name")
 	private String truck_name;
 	
 	@Column(name="zipcode")
@@ -51,6 +54,37 @@ public class FoodTruckOwner {
 	@Column(name="address_line_two", length=200)
 	private String address_line_2;
 	
+	@Column(name="city", length=30)
+	private String city;
+	
+	@Column(name="state", length=30)
+	private String state;
+	
+	
+	
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	@OneToOne(cascade = CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private User user;
+	
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public String getTruck_name() {
 		return truck_name;
 	}

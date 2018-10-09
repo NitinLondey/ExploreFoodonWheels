@@ -2,6 +2,7 @@ package com.albany.foodOnWheels.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,9 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 import com.albany.foodOnWheels.model.FoodTruckOwner;
 import com.albany.foodOnWheels.model.User;
@@ -63,8 +61,13 @@ public class Signup extends HttpServlet {
 		
 		
 		if(register.equals("truck")) {
+			user.setRole("truck_owner");
+			SessionFactory sessionFactory = Connection.getSessionFactory();
+			Session session = sessionFactory.openSession();
+			session.beginTransaction();
+			session.persist(user);
 			FoodTruckOwner truck_owner = new FoodTruckOwner();
-			truck_owner.setTruck_name(request.getParameter("truck_name"));
+			truck_owner.setTruck_name(request.getParameter("user_name"));
 			truck_owner.setZip_code(Integer.parseInt(request.getParameter("zipcode")));
 			truck_owner.setPhone(request.getParameter("phone"));
 			
@@ -83,14 +86,8 @@ public class Signup extends HttpServlet {
 			truck_owner.setIs_moving(false);
 			truck_owner.setAddress_line_1(request.getParameter("address1"));
 			truck_owner.setAddress_line_2(request.getParameter("address2"));
-			
-			user.setRole("truck_owner");
-
-			SessionFactory sessionFactory = Connection.getSessionFactory();
-			Session session = sessionFactory.openSession();
-			session.beginTransaction();
-			
-			session.save(user);
+			truck_owner.setCity(request.getParameter("city"));
+			truck_owner.setState(request.getParameter("state"));
 			session.save(truck_owner);
 			session.getTransaction().commit();
 			session.close();
@@ -107,6 +104,10 @@ public class Signup extends HttpServlet {
 			session.close();
 			
 		}
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/HomePage");
+		dispatcher.forward(request, response);
+		
+		
 		
 		
 		
