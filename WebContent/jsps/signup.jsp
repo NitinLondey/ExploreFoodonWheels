@@ -109,7 +109,12 @@
 				<jsp:param value="TruckOwner" name="UserType"/>
 				</jsp:include>
 			</div>
-			<div class="space25px" style="height:43px"></div>
+			<div>
+				<jsp:include page="/jsps/gmailSignup.jsp">
+				<jsp:param value="TruckOwner" name="UserType"/>
+				</jsp:include>
+			</div>
+			<div class="space25px" style="height:5px"></div>
            
            	<div class="form-group">
                   <label>Email</label>

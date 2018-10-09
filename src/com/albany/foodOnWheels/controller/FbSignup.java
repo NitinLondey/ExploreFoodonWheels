@@ -45,6 +45,7 @@ public class FbSignup extends HttpServlet {
 		user.setLastname(request.getParameter("user_last_name"));
 		user.setEmail(request.getParameter("user_email"));
 		String user_type = request.getParameter("user_type");
+		String loginType =(String) request.getParameter("type");
 		HttpSession httpSession = request.getSession();
 		Session session = null;
 		Transaction tx = null;
@@ -63,22 +64,40 @@ public class FbSignup extends HttpServlet {
 			if(userList.size()> 0) {
 				User loggedin=  userList.get(0);
 				
-				request.setAttribute("msg", "Your Facebook account has already registered! Please log in.");
+				if(loginType.equals("Fb")) {
+					request.setAttribute("msg", "Your Facebook account has already registered! Please log in.");
+				}else {
+					request.setAttribute("msg", "Your Gmail account has already registered! Please log in.");
+				}
 				request.setAttribute("user", loggedin);
 				request.getRequestDispatcher("/jsps/login.jsp").forward(request, response);
 						
 			}
 			else {
-				if(user_type.equals("TruckOwner")) {
+				if(loginType.equals("Fb")) {
+					if(user_type.equals("TruckOwner")) {
 					request.setAttribute("msg", "Facebook login successfully! Please finish signup by filling in other information");
 					request.setAttribute("user", user);
 					request.setAttribute("FBname", ("Welcome! "+request.getParameter("user_name")));
 					request.getRequestDispatcher("/jsps/signup.jsp").forward(request, response);
-				}else {
+					}else {
 					request.setAttribute("msg", "Facebook login successfully! Please finish signup by filling in other information");
 					request.setAttribute("user", user);
 					request.setAttribute("FBname", ("Welcome! "+ user.getUser_name()));
 					request.getRequestDispatcher("/jsps/signup-user.jsp").forward(request, response);
+					}
+				}else {
+					if(user_type.equals("TruckOwner")) {
+						request.setAttribute("msg", "Gmail login successfully! Please finish signup by filling in other information");
+						request.setAttribute("user", user);
+						request.setAttribute("FBname", ("Welcome! "+request.getParameter("user_name")));
+						request.getRequestDispatcher("/jsps/signup.jsp").forward(request, response);
+						}else {
+						request.setAttribute("msg", "Gmail login successfully! Please finish signup by filling in other information");
+						request.setAttribute("user", user);
+						request.setAttribute("FBname", ("Welcome! "+ user.getUser_name()));
+						request.getRequestDispatcher("/jsps/signup-user.jsp").forward(request, response);
+						}
 				}
 			}
 		} catch (Exception e) {

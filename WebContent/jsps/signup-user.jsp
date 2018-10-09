@@ -90,6 +90,12 @@
 					<jsp:param value="User" name="UserType"/>
 					</jsp:include>
 				</div>
+				<div>
+					<jsp:include page="/jsps/gmailSignup.jsp">
+					<jsp:param value="User" name="UserType"/>
+					</jsp:include>
+				</div>
+				
 				<div class="space25px" style="height:20px"></div>
 				<div class="form-group">
                   <label>Address Line 2</label>

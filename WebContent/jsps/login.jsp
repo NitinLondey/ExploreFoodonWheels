@@ -56,6 +56,10 @@
             	<div style="text-align:center" >
 				<%@include file="/jsps/fblogin.jsp" %>
 				</div>
+				<div style="text-align:center" >
+				<%@include file="/jsps/gmail.jsp" %>
+				</div>
+				
 		  </div>
 		</div>
 		<div class="row nomargin">

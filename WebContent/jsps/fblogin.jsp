@@ -79,7 +79,7 @@
 	  function checkAccountStatus() { 
 	    FB.api('/me?fields=name,first_name,last_name,email', function(response) { 
 	     	window.location.href = '/ExploreFoodonWheels/FbLogin?user_name='+ response.name + '&user_first_name='
-	      	+ response.first_name +'&user_last_name='+ response.last_name+'&user_email='+ response.email;
+	      	+ response.first_name +'&user_last_name='+ response.last_name+'&user_email='+ response.email+'&type=Fb';
 	      	logout();
 	    });
 	  }  
