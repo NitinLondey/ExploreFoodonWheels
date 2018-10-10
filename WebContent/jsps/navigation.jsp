@@ -36,7 +36,7 @@
           <li><a href="9_events.html">Events</a></li>
           <li><a href="10_story.html">Story</a></li>
           <li><a href="11_gallery.html">Gallery</a></li>
-          
+          <li><a href="/ExploreFoodonWheels/profile">My Profile</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/Request_center.do">Request
 							Center</a></li>
