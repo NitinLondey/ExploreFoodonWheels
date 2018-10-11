@@ -66,12 +66,12 @@ public class EmailServlet extends HttpServlet {
 					System.out.println("email id not correct");
 				}
 				else {
-				es.send("nitinlonday@gmail.com");
+				es.send(u1.getEmail());
 				tx.commit();
 				
-				tx=session.beginTransaction();
-				List<FoodTruckOwner> foodTruckOwner = session.createCriteria(FoodTruckOwner.class)
-						.add(Restrictions.eq("", user)).list();
+//				/*tx=session.beginTransaction();
+//				List<FoodTruckOwner> foodTruckOwner = session.createCriteria(FoodTruckOwner.class)
+//						.add(Restrictions.eq("", user)).list();*/
 				}
 				
 		}
