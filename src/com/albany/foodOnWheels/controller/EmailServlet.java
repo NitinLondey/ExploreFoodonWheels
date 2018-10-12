@@ -61,17 +61,35 @@ public class EmailServlet extends HttpServlet {
 				User u1=userlist.get(0);	
 				EmailService es=new EmailService();
 				System.out.println(u1.getEmail());
+				String currentstatus="";
+				String approve =request.getParameter("approval");	
+				
+				if(approve.equals("approved")){
+						currentstatus="Approved";
+					}
+					else {
+						currentstatus="Rejected";
+					}
 				String s[]=u1.getEmail().split("@");
 				if(!s[1].equals("gmail.com")) {
 					System.out.println("email id not correct");
 				}
 				else {
-				es.send(u1.getEmail());
-				tx.commit();
+				es.send(u1.getEmail(),approve);
+			
 				
-//				/*tx=session.beginTransaction();
-//				List<FoodTruckOwner> foodTruckOwner = session.createCriteria(FoodTruckOwner.class)
-//						.add(Restrictions.eq("", user)).list();*/
+			/*	
+			List<FoodTruckOwner> foodTruckOwner = session.createCriteria(FoodTruckOwner.class)
+						.add(Restrictions.eq("u1", user)).list();
+			FoodTruckOwner ft=foodTruckOwner.get(0);
+			ft.setApproved(true);
+			session.save(ft);
+			session.close();
+			tx.commit();
+			RequestDispatcher rd = request.getRequestDispatcher("/jsps/admin_request.jsp");
+			rd.forward(request, response);*/
+
+				
 				}
 				
 		}

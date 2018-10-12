@@ -23,7 +23,7 @@
 	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
 	crossorigin="anonymous"></script>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Request Center</title>
 </head>
 <body>
 	<!-- body bgcolor="#52BE80"-->
@@ -109,8 +109,8 @@ body {
 			<tr>
 				<th>Name</th>
 				<th>Email</th>
-				<th>Reject</th>
 				<th>Approve</th>
+				<th>Reject</th>
 				<th>Status</th>
 
 			</tr>
@@ -120,9 +120,14 @@ body {
 					<td><c:out value="${list.truck_name}" /></td>
 					<td><c:out value="${list.user.email}" /></td>
 					<!-- <td><input type="button" value="Approve" onclick="getParam();"></td> -->
+
+
+				<td><a
+						href="${pageContext.request.contextPath}/EmailServlet.do?user_name=<c:out value="${list.user.user_name}"/>&approval=approved ">Approve</a></td>
+
+
 					<td><a
-						href="${pageContext.request.contextPath}/EmailServlet.do?user_name=<c:out value="${list.user.user_name}"/>">Approve</a></td>
-					<td><input type="button" value="Reject"></td>
+						href="${pageContext.request.contextPath}/EmailServlet.do?user_name=<c:out value="${list.user.user_name}"/>&reject=rejected ">Reject</a></td>
 					<td><c:out value="${list.approved}" /></td>
 				</tr>
 			</c:forEach>

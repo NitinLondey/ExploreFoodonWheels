@@ -21,7 +21,7 @@ public class EmailService {
 
 	}
 
-	public void send(String toUser) {
+	public void send(String toUser,String textMessage) {
 
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
@@ -40,7 +40,7 @@ public class EmailService {
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(username));
 			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toUser));
-			message.setSubject("New Food Truck registeration done");
+			message.setSubject("New Food Truck registeration is "  +textMessage);
 			message.setText("Thanks for connecting");
 			
 			Transport.send(message);

@@ -53,10 +53,10 @@
             <h4 class="hdr2 special">Login</h4>
 		  </div>
 		  <div class="col-md-6">
-            	<div style="text-align:center" >
+            	<div >
 				<%@include file="/jsps/fblogin.jsp" %>
 				</div>
-				<div style="text-align:center" >
+				<div >
 				<%@include file="/jsps/gmail.jsp" %>
 				</div>
 				

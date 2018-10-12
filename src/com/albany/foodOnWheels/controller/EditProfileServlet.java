@@ -40,7 +40,9 @@ public class EditProfileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doPost(request, response);
+		request.getRequestDispatcher("/jsps/index.jsp").forward(request, response);
+		return;
+
 		
 	}
 
@@ -117,9 +119,7 @@ public class EditProfileServlet extends HttpServlet {
 				}
 				System.out.println("Go to profile");
 				request.setAttribute("user", user);
-				
-				request.getRequestDispatcher("/jsps/profile.jsp").forward(request, response);
-				return;
+				doGet(request, response);
 					
 		} catch (Exception e) {
 			tx.rollback();

@@ -90,18 +90,18 @@
 	    });
 	  }  
 	
-	 // window.addEventListener("beforeunload", logout());
+	 window.addEventListener("beforeunload", logout());
 	</script> 
 		<!--
 		  Below we include the Login Button social plugin. This button uses
 		  the JavaScript SDK to present a graphical Login button that triggers
 		  the FB.login() function when clicked.
 		-->
-
-		<fb:login-button auto_logout_link="true" size="large" scope="public_profile,email" onlogin="checkLoginState();">
-		</fb:login-button>
 		<div id="status">
 		</div> 
+		<fb:login-button auto_logout_link="true" size="large" scope="public_profile,email" onlogin="checkLoginState();">
+		</fb:login-button>
+		
 		 <script type="text/javascript">
 		</script>
 	</body>

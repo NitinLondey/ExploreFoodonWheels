@@ -34,9 +34,7 @@
           <li class="active"><a href="${pageContext.request.contextPath}/HomePage">Home</a></li>
           <li><a href="8_menucard.html">Menu card</a></li>
           <li><a href="9_events.html">Events</a></li>
-          <li><a href="10_story.html">Story</a></li>
-          <li><a href="11_gallery.html">Gallery</a></li>
-          <li><a href="/ExploreFoodonWheels/profile">My Profile</a></li>
+          <li><a href="${pageContext.request.contextPath}/profile">My Profile</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/Request_center.do">Request
 							Center</a></li>
@@ -55,6 +53,7 @@
 								href="${pageContext.request.contextPath}/jsps/signup-user.jsp">Signup
 									as User</a></li>
 						</ul></li>
+						<li><a href="${pageContext.request.contextPath}/jsps/login.jsp">Login</a></li>
 					<%
 						} else {
 					%>
@@ -62,6 +61,7 @@
 					<%
 						}
 					%>
+			
 
 				</ul>
 			</div>
