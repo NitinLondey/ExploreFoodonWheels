@@ -46,8 +46,11 @@
             <p style="color:yellow; font-weight: 900">${FBname } <br/> ${msg }</p>
                 <div class="form-group">
                   <label>User name</label>
-                  <input type="text" required class="form-control" name="user_name" value="${user.user_name }" placeholder="enter user name">
+                  <input type="text" id="user_name" required class="form-control" name="user_name" value="${user.user_name }" placeholder="enter user name">
                 </div>
+                <div id="message_name">
+				  <p id="isRepeat" class="invalid">User name must not be repeat</p>
+				</div>
                  <div class="form-group">
                   <label>First name</label>
                   <input type="text" required class="form-control" name="first_name" value="${user.firstname }" placeholder="enter your first name">
@@ -154,6 +157,76 @@
 </body>
 
 <script>
+//name repeat?
+var uerName = document.getElementById("user_name");
+var isRepeat = document.getElementById("isRepeat");
+function getXHR(){
+	var xmlHttp;
+	try {
+		xmlHttp=new XMLHttpRequest();
+	}catch(e)
+	{
+		try{
+			xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch(e)
+		{
+			try{
+				xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch(e)
+			{
+				alert("你的浏览器不支持ajax");
+				return false;
+			}
+			
+		}
+		
+	}
+	return xmlHttp;
+}
+
+uerName.onfocus = function() { 
+	document.getElementById("message_name").style.display = "none";
+}
+uerName.onblur = function() {
+	//发出已补请求
+	//1/得到xhr对象
+	var xhr=getXHR();
+	//2.注册状态变化监听器
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4)
+			{
+			if(xhr.status==200)
+				{
+				/* alert(xhr.responseText); */
+				if(xhr.responseText!="exist"){
+					document.getElementById("message_name").style.display = "none";
+				}else{
+					document.getElementById("message_name").style.display = "block";
+				}
+/* 				alert("服务器响应了");
+				document.getElementById("user_name").innerHTML=xhr.responseText; */
+				}
+			}
+	}
+	//3.建立与服务器的连接
+	xhr.open("POST","${pageContext.request.contextPath}/AjaxServlet.do"+"?user_name="+uerName.value);
+	//4.向服务器发出请求
+	xhr.send();
+
+	
+}
+uerName.onkeyup = function() {
+	  if(uerName.value=="xxx") {  
+		  isRepeat.classList.remove("invalid");
+		  isRepeat.classList.add("valid");
+	  } else {
+		  isRepeat.classList.remove("valid");
+		  isRepeat.classList.add("invalid");
+	  }
+}
+//pwd
 var myInput = document.getElementById("psw");
 var letter = document.getElementById("letter");
 var capital = document.getElementById("capital");
@@ -241,6 +314,20 @@ confirm_password.onkeyup = validatePassword;
     font-size: 18px;
 }
 
+#message_name {
+    display:none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+#message_name p {
+    padding: 10px 35px;
+    font-size: 18px;
+}
+
 /* Add a green text color and a checkmark when the requirements are right */
 .valid {
     color: green;
@@ -249,7 +336,7 @@ confirm_password.onkeyup = validatePassword;
 .valid:before {
     position: relative;
     left: -35px;
-    content: ✔;
+    content: â;
 }
 
 /* Add a red text color and an "x" when the requirements are wrong */
@@ -260,7 +347,7 @@ confirm_password.onkeyup = validatePassword;
 .invalid:before {
     position: relative;
     left: -35px;
-    content: ✖;
+    content: â;
 }
 </style>
 </html>
