@@ -190,10 +190,7 @@ uerName.onfocus = function() {
 	document.getElementById("message_name").style.display = "none";
 }
 uerName.onblur = function() {
-	//发出已补请求
-	//1/得到xhr对象
 	var xhr=getXHR();
-	//2.注册状态变化监听器
 	xhr.onreadystatechange=function(){
 		if(xhr.readyState==4)
 			{
@@ -205,14 +202,11 @@ uerName.onblur = function() {
 				}else{
 					document.getElementById("message_name").style.display = "block";
 				}
-/* 				alert("服务器响应了");
-				document.getElementById("user_name").innerHTML=xhr.responseText; */
+
 				}
 			}
 	}
-	//3.建立与服务器的连接
 	xhr.open("POST","${pageContext.request.contextPath}/AjaxServlet.do"+"?user_name="+uerName.value);
-	//4.向服务器发出请求
 	xhr.send();
 
 	

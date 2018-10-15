@@ -63,10 +63,7 @@ public class AjaxServlet extends HttpServlet {
 			System.out.println(userList.size());
 			if(userList.size()> 0) {
 				response.setCharacterEncoding("utf-8");
-//				System.out.println("ajax后台交互成功");
-//				PrintWriter write=response.getWriter();
-//				write.println("我是输出的文字<br>");
-//				write.flush();
+
 				String rand = "exist";
 				response.getWriter().print(rand);
 				return;		
