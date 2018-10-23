@@ -46,7 +46,7 @@
       <div class="easyBox full">
 
         
-		<form class="simpleForm" action="${pageContext.request.contextPath}/Login.do" method="post">
+		<form class="simpleForm" action="${pageContext.request.contextPath}/Login.do" id = "signup-form">
            <fieldset>
         <div class="row nomargin">
           <div class="col-md-6">
@@ -73,7 +73,7 @@
                   <label>Password</label>
                   <input type="password" id ="psw" class="form-control" name="password" value="${user.password }" placeholder="enter your password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
                 </div>
-                <input class="btn btn-default" type="submit" value="Submit">
+                <input class="btn btn-default" type="button" value="Submit" onclick="submitForm();">
                 <div>
                 <p style="color:yellow;font-size:20; font-weight: 900"> ${msg }</p>
                 </div>
@@ -97,5 +97,10 @@
  <%@include file="/jsps/footer.jsp" %>
 
 </body>
+<script>
 
+function submitForm(){
+	document.getElementById("signup-form").submit();
+}
+</script>
 </html>

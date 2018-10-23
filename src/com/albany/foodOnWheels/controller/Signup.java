@@ -96,7 +96,7 @@ public class Signup extends HttpServlet {
 			session.close();
 			
 		}
-		request.getRequestDispatcher("/jsps/index.jsp").forward(request, response);
+		request.getRequestDispatcher("/jsps/login.jsp").forward(request, response);
 	}
 
 	/**

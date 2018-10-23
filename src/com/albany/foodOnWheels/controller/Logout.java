@@ -35,7 +35,7 @@ public class Logout extends HttpServlet {
 		session.setAttribute("zipcode",null);
 		session.invalidate();
 		request.setAttribute("message", "Log Out successfully.");
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsps/index.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsps/signup.jsp");
 		dispatcher.forward(request, response);
 		return;	
 	}
