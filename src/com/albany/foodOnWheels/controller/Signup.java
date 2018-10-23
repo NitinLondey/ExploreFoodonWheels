@@ -36,14 +36,6 @@ public class Signup extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String register = request.getParameter("register");
 		User user=new User();
 		user.setUser_name(request.getParameter("user_name"));
@@ -104,8 +96,15 @@ public class Signup extends HttpServlet {
 			session.close();
 			
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/HomePage");
-		dispatcher.forward(request, response);
+		request.getRequestDispatcher("/jsps/index.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		
 		
 		

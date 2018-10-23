@@ -37,7 +37,7 @@
       <div class="easyBox full">
 
         <h4 class="hdr5"><span>Sign up for Food Truck Owner</span></h4>
-		<form class="simpleForm" action="${pageContext.request.contextPath}/Signup.do" method="post">
+		<form class="simpleForm" action="${pageContext.request.contextPath}/Signup.do" id = "signup-form" >
            <fieldset>
         <div class="row nomargin">
           <div class="col-md-5">
@@ -46,19 +46,19 @@
             <p style="color:yellow; font-weight: 900">${FBname } <br/> ${msg }</p>
                 <div class="form-group">
                   <label>Food Truck name</label>
-                  <input type="text" required class="form-control" name="user_name" placeholder="enter food truck name">
+                  <input type="text"  class="form-control" name="user_name" placeholder="enter food truck name">
                 </div>
                  <div class="form-group">
                   <label>First name</label>
-                  <input type="text" required class="form-control" name="first_name" value="${user.firstname }" placeholder="enter your first name">
+                  <input type="text"  class="form-control" name="first_name" value="${user.firstname }" placeholder="enter your first name">
                 </div>
                  <div class="form-group">
                   <label>Last name</label>
-                  <input type="text" required class="form-control" name="last_name" value="${user.lastname }" placeholder="enter your last name">
+                  <input type="text"  class="form-control" name="last_name" value="${user.lastname }" placeholder="enter your last name">
                 </div>
                 <div class="form-group">
                   <label>Password</label>
-                  <input type="password" id ="psw" class="form-control" name="password" placeholder="enter your password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                  <input type="password" id ="psw" class="form-control" name="password" placeholder="enter your password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" >
                 </div>
                 <div id="message">
 				  <h6 style="color: green;">Password must contain the following:</h6>
@@ -69,12 +69,12 @@
 				</div>
                 <div class="form-group">
                   <label>Verify Password</label>
-                  <input type="password" required class="form-control" name="password" placeholder="confirm password" id = "confirm_password">
+                  <input type="password"  class="form-control" name="password" placeholder="confirm password" id = "confirm_password">
                 </div>
                 
                 <div class="form-group">
                   <label>Address Line 1</label>
-                  <input type="text" required class="form-control" name="address1" placeholder="enter your  address 1">
+                  <input type="text"  class="form-control" name="address1" placeholder="enter your  address 1">
                 </div>
                 <div class="form-group">
                   <label>Address Line 2</label>
@@ -82,19 +82,19 @@
                 </div>
                 <div class="form-group">
                   <label>City</label>
-                  <input type="text" required class="form-control" name="city" placeholder="enter your  city">
+                  <input type="text"  class="form-control" name="city" placeholder="enter your  city">
                 </div>
                 <div class="form-group">
                   <label>State</label>
-                  <input type="text" required class="form-control" name="state" placeholder="enter your state">
+                  <input type="text"  class="form-control" name="state" placeholder="enter your state">
                 </div>
                  <div class="form-group">
                   <label>Zipcode</label>
-                  <input type="text" required class="form-control" name="zipcode" placeholder="enter your Zipcode">
+                  <input type="text"  class="form-control" name="zipcode" placeholder="enter your Zipcode">
                 </div>
                 <div class="form-group">
                   <label>Phone</label>
-                   <input type="tel" placeholder="123-456-7890"  required class="form-control" name="phone" >
+                   <input type="tel" placeholder="123-456-7890"   class="form-control" name="phone" >
                 </div>
         
           </div>
@@ -118,7 +118,7 @@
            
            	<div class="form-group">
                   <label>Email</label>
-                   <input type="email" required class="form-control" name="email" value="${user.email }" placeholder="enter your email">
+                   <input type="email"  class="form-control" name="email" value="${user.email }" placeholder="enter your email">
                 </div>
            
                 <div class="form-group">
@@ -144,11 +144,11 @@
 	             </div>
                 <div class="form-group">
                   <label>Week Day Time</label>
-                  <input type="text" required class="form-control" name="week_day" placeholder="enter your weekday timings">
+                  <input type="text"  class="form-control" name="week_day" placeholder="enter your weekday timings">
                 </div>
                 <div class="form-group">
                   <label>Week End Time</label>
-                  <input type="text" required class="form-control" name="week_end" placeholder="enter your weekend timings">
+                  <input type="text"  class="form-control" name="week_end" placeholder="enter your weekend timings">
                 </div>
                 <div class="form-group">
                   <label>Accepted Payments</label>
@@ -171,7 +171,7 @@
 			<input type="hidden" name ="register" value="truck"/>
             
 
-            <input class="btn btn-default" type="submit" value="Submit">
+            <input class="btn btn-default" type="button" value="Submit" onclick="submitForm();">
             <div>
 				Already have a profile?  <a href="${pageContext.request.contextPath}/jsps/login.jsp">Login</a>  
 			</div>
@@ -195,6 +195,13 @@
 </body>
 
 <script>
+
+function submitForm(){
+	document.getElementById("signup-form").submit();
+}
+
+
+
 var myInput = document.getElementById("psw");
 var letter = document.getElementById("letter");
 var capital = document.getElementById("capital");
