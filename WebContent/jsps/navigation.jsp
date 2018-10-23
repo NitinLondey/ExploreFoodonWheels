@@ -34,31 +34,40 @@
           <li class="active"><a href="${pageContext.request.contextPath}/HomePage">Home</a></li>
           <li><a href="8_menucard.html">Menu card</a></li>
           <li><a href="9_events.html">Events</a></li>
-          <li><a href="10_story.html">Story</a></li>
-          <li><a href="11_gallery.html">Gallery</a></li>
-          
-          <li><a href="12_contact.html">Contact</a></li>
-          <%if(request.getSession().getAttribute("user_name")==null)
-				{%>
-					<li class="dropdown active"> 
-          <a  class="dropdown-toggle">Sign up</a>
-	          <ul class="dropdown-menu">
-	          	<li><a href="${pageContext.request.contextPath}/jsps/signup.jsp">Signup as Food - Truck</a></li>
-	          	<li><a href="${pageContext.request.contextPath}/jsps/signup-user.jsp">Signup as User</a></li>
-	          </ul>
-          	
-        </li>
-				 <% } else{ %>
-					 <li><a href="${pageContext.request.contextPath}/Logout.do">Logout</a></li>
-				 <%  }
-				 
-				 %>
-          
-        </ul>
-      </div>
-      <!-- /.navbar-collapse -->
-    </div>
-    <!-- / container -->
+          <li><a href="${pageContext.request.contextPath}/profile">My Profile</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/Request_center.do">Request
+							Center</a></li>
+
+
+					<%
+						if (request.getSession().getAttribute("user_name") == null) {
+					%>
+					<li class="dropdown active"><a class="dropdown-toggle">Sign
+							up</a>
+						<ul class="dropdown-menu">
+							<li><a
+								href="${pageContext.request.contextPath}/jsps/signup.jsp">Signup
+									as Food - Truck</a></li>
+							<li><a
+								href="${pageContext.request.contextPath}/jsps/signup-user.jsp">Signup
+									as User</a></li>
+						</ul></li>
+						<li><a href="${pageContext.request.contextPath}/jsps/login.jsp">Login</a></li>
+					<%
+						} else {
+					%>
+					<li><a href="${pageContext.request.contextPath}/Logout.do">Logout</a></li>
+					<%
+						}
+					%>
+			
+
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- / container -->
 
     <div class="btm"></div>
   </div>

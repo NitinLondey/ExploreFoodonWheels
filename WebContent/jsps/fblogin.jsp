@@ -79,7 +79,7 @@
 	  function checkAccountStatus() { 
 	    FB.api('/me?fields=name,first_name,last_name,email', function(response) { 
 	     	window.location.href = '/ExploreFoodonWheels/FbLogin?user_name='+ response.name + '&user_first_name='
-	      	+ response.first_name +'&user_last_name='+ response.last_name+'&user_email='+ response.email;
+	      	+ response.first_name +'&user_last_name='+ response.last_name+'&user_email='+ response.email+'&type=Fb';
 	      	logout();
 	    });
 	  }  
@@ -92,11 +92,12 @@
 		  the JavaScript SDK to present a graphical Login button that triggers
 		  the FB.login() function when clicked.
 		-->
-
-		<fb:login-button auto_logout_link="true" size="large" scope="public_profile,email" onlogin="checkLoginState();">
-		</fb:login-button>
+		
 		<div id="status">
 		</div> 
+		<fb:login-button auto_logout_link="true" size="large" scope="public_profile,email" onlogin="checkLoginState();">
+		</fb:login-button>
+		
 		 <script type="text/javascript">
 		 
 		</script>

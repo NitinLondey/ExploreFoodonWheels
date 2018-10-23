@@ -43,6 +43,7 @@ public class FbLogin extends HttpServlet {
 		user.setFirstname(request.getParameter("user_first_name"));
 		user.setLastname(request.getParameter("user_last_name"));
 		user.setEmail(request.getParameter("user_email"));
+		String loginType =(String) request.getParameter("type");
 		
 		HttpSession httpSession = request.getSession();
 		Session session = null;
@@ -65,19 +66,29 @@ public class FbLogin extends HttpServlet {
 				User loggedin=  userList.get(0);
 				request.setAttribute("user", loggedin);
 				
-						
-				request.setAttribute("msg", "Facebook login successfully!<br/>  Please log in by Clicking the button.");
-				request.getRequestDispatcher("/jsps/login.jsp").forward(request, response);
+				if(loginType.equals("Fb")) {
+					request.setAttribute("msg", "Facebook login successfully!<br/>  Please log in by Clicking the button.");
+					request.getRequestDispatcher("/jsps/login.jsp").forward(request, response);
+				}else {
+					request.setAttribute("msg", "Gmail login successfully!<br/>  Please log in by Clicking the button.");
+					request.getRequestDispatcher("/jsps/login.jsp").forward(request, response);
+				}
 			}
 			else {
 				/**request.setAttribute("FBname", ("Welcome! "+request.getParameter("user_name")));
 				request.setAttribute("msg", "Your Facebook is not registered! Please finish signup by filling in other information");
 				request.setAttribute("user", user);
 				request.getRequestDispatcher("/jsps/signup.jsp").forward(request, response); */
-				
+				if(loginType.equals("Fb")) {
 				response.getWriter().print("<h1>Your Facebook is not registered!</h1><a href='"+request.getContextPath()+"/jsps/signup.jsp"
 					+ "'>Click here to signup as a food truck ower</a><br/><a href='"+request.getContextPath()+"/jsps/signup-user.jsp"
 					+ "'>Click here to signup as a user</a>");
+				}
+				else {
+					response.getWriter().print("<h1>Your Gmail is not registered!</h1><a href='"+request.getContextPath()+"/jsps/signup.jsp"
+							+ "'>Click here to signup as a food truck ower</a><br/><a href='"+request.getContextPath()+"/jsps/signup-user.jsp"
+							+ "'>Click here to signup as a user</a>");
+				}
 				
 			}
 		} catch (Exception e) {
