@@ -83,25 +83,34 @@ body {
 
 #requesttable tr:nth-child(even) {
 	background-color: #f2f2f2;
+	color: black;
 }
 
-#requesttable tr:hover {
+/* #requesttable tr:hover {
 	background-color: #ddd;
-}
+	color: black;
+} */
 
 #requesttable th {
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: left;
 	background-color: #4CAF50;
-	color: white;
+	color: black;
+}
+
+h2 {
+    text-align: center;
 }
 </style>
+
+	<%@include file="/jsps/header.jsp" %>
+
 </head>
 <body>
-
+		 <%@include file="/jsps/navigation.jsp" %>
+		
 	<h2>Request Center</h2>
-
 
 	<div class="">
 
@@ -109,6 +118,8 @@ body {
 			<tr>
 				<th>Name</th>
 				<th>Email</th>
+				<th>Phone Number</th>				
+				<th>Cuisine</th>
 				<th>Approve</th>
 				<th>Reject</th>
 				<th>Status</th>
@@ -119,6 +130,9 @@ body {
 				<tr>
 					<td><c:out value="${list.truck_name}" /></td>
 					<td><c:out value="${list.user.email}" /></td>
+					<td><c:out value="${list.phone}" /></td>
+					<td><c:out value="${list.cuisine}" /></td>
+					
 					<!-- <td><input type="button" value="Approve" onclick="getParam();"></td> -->
 
 
