@@ -152,9 +152,9 @@
                 </div>
                 <div class="form-group">
                   <label>Accepted Payments</label>
-                  <input type="checkbox" name="payment" value="Monday">Cash<br>      
-	                <input type="checkbox" name="payment" value="Tuesday">Debit Card<br>      
-	                <input type="checkbox" name="payment" value="Wednesday">Credit Card<br> 
+                  <input type="checkbox" name="payment" value="Cash">Cash<br>      
+	                <input type="checkbox" name="payment" value="Debit Card">Debit Card<br>      
+	                <input type="checkbox" name="payment" value="Credit Card">Credit Card<br> 
                 </div>
                 
                 

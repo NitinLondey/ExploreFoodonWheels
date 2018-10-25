@@ -69,7 +69,7 @@ public class Login extends HttpServlet {
 				httpSession.setAttribute("user_name", loggedin.getUser_name());
 				httpSession.setAttribute("role", loggedin.getRole());
 				httpSession.setAttribute("zipcode", loggedin.getZipcode());
-				request.setAttribute("message", "Login successful ! Welcome"+ loggedin.getUser_name());
+				request.setAttribute("message", "Login successful ! Welcome "+ loggedin.getUser_name());
 				
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/HomePage");
 				dispatcher.forward(request, response);

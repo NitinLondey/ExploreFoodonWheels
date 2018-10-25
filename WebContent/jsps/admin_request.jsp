@@ -50,16 +50,19 @@ body {
 	padding: 14px 16px;
 	transition: 0.3s;
 	font-size: 17px;
+	color: red;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
 	background-color: #ddd;
+	color: red;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
 	background-color: #ccc;
+	color: green;
 }
 
 /* Style the tab content */
@@ -102,6 +105,11 @@ body {
 h2 {
     text-align: center;
 }
+a{
+	color: (internal value);
+    text-decoration: underline;
+}
+
 </style>
 
 	<%@include file="/jsps/header.jsp" %>
@@ -120,6 +128,9 @@ h2 {
 				<th>Email</th>
 				<th>Phone Number</th>				
 				<th>Cuisine</th>
+				<th>Days</th>
+				<th>Weekday Time</th>
+				<th>Weekend Time</th>																		
 				<th>Approve</th>
 				<th>Reject</th>
 				<th>Status</th>
@@ -132,7 +143,9 @@ h2 {
 					<td><c:out value="${list.user.email}" /></td>
 					<td><c:out value="${list.phone}" /></td>
 					<td><c:out value="${list.cuisine}" /></td>
-					
+					<td><c:out value="${list.days}" /></td>
+					<td><c:out value="${list.weekday_time}" /></td>
+					<td><c:out value="${list.weekend_time}" /></td>
 					<!-- <td><input type="button" value="Approve" onclick="getParam();"></td> -->
 
 
