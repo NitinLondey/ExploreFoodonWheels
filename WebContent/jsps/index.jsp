@@ -1,3 +1,6 @@
+
+
+
 <html>
 
 
@@ -20,6 +23,7 @@
 
 <!-- ***************** -->
 <!-- ** THREE BOXES ** -->
+
 <%if((request.getAttribute("message")!=null))
       {
  %>

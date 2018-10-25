@@ -70,15 +70,30 @@ public class Login extends HttpServlet {
 				httpSession.setAttribute("role", loggedin.getRole());
 				httpSession.setAttribute("zipcode", loggedin.getZipcode());
 				request.setAttribute("message", "Login successful ! Welcome "+ loggedin.getUser_name());
+
 				
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/HomePage");
-				dispatcher.forward(request, response);
+				if(loggedin.getRole().equals("user")) {
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/SearchFoodTruck.do");
+					
+					dispatcher.forward(request, response);
+				}
+				else if(loggedin.getRole().equals("truck_owner")) {
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/HomePage");
+					dispatcher.forward(request, response);
+				}
+				else {
+					//admin
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Request_center.do");
+					dispatcher.forward(request, response);
+				}
+
+				
 				return;	
 				
 				
 			}
 			else {
-				System.out.println("else");
+				
 				request.setAttribute("message", "Login failed ! Incorrect User name or Password");
 				request.getRequestDispatcher("/jsps/login.jsp").include(request, response);
 				
