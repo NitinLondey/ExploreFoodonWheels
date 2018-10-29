@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <title>User Profile</title>
+  <title>Foodtruck Profile</title>
 
   
 <%@include file="/jsps/header.jsp" %>
@@ -32,29 +32,28 @@
 
     <div class="container">
 
-      <h3 class="hdr1">User Profile</h3>
-
+      <h3 class="hdr1">Truck Owner Profile</h3>
+		
       <div class="easyBox full">
 
-        <h4 class="hdr5"><span>User Information</span></h4>
-		<form class="simpleForm" action="${pageContext.request.contextPath}/EditProfileServlet.do" id = "signup-form">
+        <h4 class="hdr5"><span>Food Truck Information</span></h4>
+		<form class="simpleForm" action="${pageContext.request.contextPath}/EditProfileServlet.do" id = "signup-form" >
            <fieldset>
         <div class="row nomargin">
           <div class="col-md-5">
-           
             <p style="color:yellow; font-weight: 900">${msg }</p>
-
                 <div class="form-group">
-                  <label>User name: ${user.user_name }</label>
+                  <label>Food Truck name: ${user.user_name }</label>
                 </div>
                  <div class="form-group">
                   <label>First name</label>
-                  <input type="text" class="form-control" name="first_name" value="${user.firstname }" placeholder="enter your first name">
+                  <input type="text"  class="form-control" name="first_name" value="${user.firstname }" placeholder="enter your first name">
                 </div>
                  <div class="form-group">
                   <label>Last name</label>
-                  <input type="text" class="form-control" name="last_name" value="${user.lastname }" placeholder="enter your last name">
+                  <input type="text"  class="form-control" name="last_name" value="${user.lastname }" placeholder="enter your last name">
                 </div>
+                
                 <div class="form-group">
                   <label>Address Line 1</label>
                   <input type="text"  class="form-control" name="address1" value="${user.address_line1 }" placeholder="enter your  address 1">
@@ -65,43 +64,77 @@
                 </div>
                 <div class="form-group">
                   <label>City</label>
-                  <input type="text" class="form-control" name="city" value="${user.city }" placeholder="enter your  city">
+                  <input type="text"  class="form-control" name="city" value="${user.city }" placeholder="enter your  city">
+                </div>
+                <div class="form-group">
+                  <label>State</label>
+                  <input type="text"  class="form-control" name="state" value="${user.state }" placeholder="enter your state">
+                </div>
+               
+                <div class="form-group">
+                  <label>Phone</label>
+                   <input type="tel" placeholder="123-456-7890" value="${user.phone }" class="form-control" name="phone" >
                 </div>
                 
-              
-
+                <div class="form-group">
+                  <label>Email</label>
+                   <input type="email"  class="form-control" name="email" value="${user.email }" placeholder="enter your email">
+                </div>
+        
           </div>
           <div class="col-md-2">
           </div>
           <div class="col-md-5">
-            	<div class="space50px"></div>
-            	<div class="space25px"></div>
-		
-                <div class="form-group">
-                  <label>State</label>
-                  <input type="text" class="form-control" name="state"  value="${user.state }" placeholder="enter your state">
-                </div>
-                 <div class="form-group">
-                  <label>Zipcode</label>
-                  <input type="text" class="form-control" name="zipcode" value="${user.zipcode }" placeholder="enter your Zipcode">
-                </div>
-                <div class="form-group">
-                  <label>Phone</label>
-                   <input type="tel" placeholder="1234567890"
-            required class="form-control" name="phone" value="${user.phone }" placeholder="enter your phone">
-                </div>
-           	<div class="form-group">
-                  <label>Email</label>
-                   <input type="email" class="form-control" name="email" value="${user.email }" placeholder="enter your email">
-                </div>
-           
-               
-
             
-			<input type="hidden" name ="register" value="user"/>
+
+			<div class="space25px"></div>
+			<div class="space50px" style="height:46px"></div>
+	
+           
+           	
+           
+                <div class="form-group">
+                	<label>Cuisine</label>
+	                <input type="checkbox" name="cuisine" value="Mexican">Mexican<br>      
+	                <input type="checkbox" name="cuisine" value="Chinese">Chinese<br>      
+	                <input type="checkbox" name="cuisine" value="Japanese">Japanese<br> 
+	                <input type="checkbox" name="cuisine" value="Thai">Thai<br> 
+	                <input type="checkbox" name="cuisine" value="American">American<br> 
+	                <input type="checkbox" name="cuisine" value="Fast_food">Fast Food<br> 
+	                <input type="checkbox" name="cuisine" value="Indian">Indian<br>  
+	             </div>
+                
+                <div class="form-group">
+                	<label>Days</label>
+	                <input type="checkbox" name="days" value="Monday">Monday<br>      
+	                <input type="checkbox" name="days" value="Tuesday">Tuesday<br>      
+	                <input type="checkbox" name="days" value="Wednesday">Wednesday<br> 
+	                <input type="checkbox" name="days" value="Thursday">Thursday<br> 
+	                <input type="checkbox" name="days" value="Friday">Friday<br> 
+	                <input type="checkbox" name="days" value="Saturday">Saturday<br> 
+	                <input type="checkbox" name="days" value="Sunday">Sunday<br>  
+	             </div>
+                <div class="form-group">
+                  <label>Week Day Time</label>
+                  <input type="text"  class="form-control" name="week_day" value="${truck.weekday_time }" placeholder="enter your weekday timings">
+                </div>
+                <div class="form-group">
+                  <label>Week End Time</label>
+                  <input type="text"  class="form-control" name="week_end" value="${truck.weekend_time }" placeholder="enter your weekend timings">
+                </div>
+                <div class="form-group">
+                  <label>Accepted Payments</label>
+                  <input type="checkbox" name="payment" value="Cash">Cash<br>      
+	                <input type="checkbox" name="payment" value="Debit Card">Debit Card<br>      
+	                <input type="checkbox" name="payment" value="Credit Card">Credit Card<br> 
+                </div>
+                
+            
+			<input type="hidden" name ="register" value="truck"/>
             
 
             <input class="btn btn-default" type="button" value="Save Change" onclick="submitForm();">
+           
           </div>
         </div>
         </fieldset>
@@ -112,7 +145,8 @@
     </div>
   </div>
 </div>
-  
+
+
 <!-- bg-1 -->
 
 
@@ -121,10 +155,52 @@
 </body>
 
 <script>
+window.onload = function(){
+	var cuisine = '<%=request.getAttribute("cuisine")%>';
+	var day = '<%=request.getAttribute("days")%>';
+	var payment = '<%=request.getAttribute("payments")%>';
+	
+	var cuisines = cuisine.split(",");
+	var boxes = document.getElementsByName("cuisine");
+    for(i=0;i<boxes.length;i++){
+        for(j=0;j<cuisines.length;j++){
+            if(boxes[i].value == cuisines[j]){
+                boxes[i].checked = true;
+                break
+            }
+        }
+    }
+    
+    var days = day.split(",");
+	boxes = document.getElementsByName("days");
+    for(i=0;i<boxes.length;i++){
+        for(j=0;j<days.length;j++){
+            if(boxes[i].value == days[j]){
+                boxes[i].checked = true;
+                break
+            }
+        }
+    }
+    
+    var payments = payment.split(",");
+	boxes = document.getElementsByName("payment");
+    for(i=0;i<boxes.length;i++){
+        for(j=0;j<payments.length;j++){
+            if(boxes[i].value == payments[j]){
+                boxes[i].checked = true;
+                break
+            }
+        }
+    }
+	
+}
 
 function submitForm(){
 	document.getElementById("signup-form").submit();
 }
+
+
+
 var myInput = document.getElementById("psw");
 var letter = document.getElementById("letter");
 var capital = document.getElementById("capital");

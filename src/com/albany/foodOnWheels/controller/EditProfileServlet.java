@@ -35,22 +35,10 @@ public class EditProfileServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
+    /**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/jsps/index.jsp").forward(request, response);
-		return;
-
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String register = request.getParameter("register");
 		HttpSession httpSession = request.getSession();
 		Session session = null;
@@ -67,34 +55,41 @@ public class EditProfileServlet extends HttpServlet {
 				System.out.println("profile" +userList.size());
 				User user=  userList.get(0);
 			
-				user.setUser_name(request.getParameter("user_name"));
+				
 				user.setFirstname(request.getParameter("first_name"));
 				user.setLastname(request.getParameter("last_name"));
 				user.setAddress_line1(request.getParameter("address1"));
 				user.setAddress_line_2(request.getParameter("address2"));
 				user.setCity(request.getParameter("city"));
 				user.setState(request.getParameter("state"));
-				user.setZipcode(Integer.parseInt(request.getParameter("zipcode")));
+				if(register.equals("user")) {
+					user.setZipcode(Integer.parseInt(request.getParameter("zipcode")));
+					httpSession.setAttribute("zipcode", Integer.parseInt(request.getParameter("zipcode")));	
+				}
 				user.setPhone(request.getParameter("phone"));
 				user.setEmail(request.getParameter("email"));
+				session.update(user);
 				tx.commit();
+				
 				
 				
 
 				
 				if(register.equals("truck")) {
-					session = sessionFactory.openSession();
 					tx = session.beginTransaction();
-					
-						List<FoodTruckOwner> foodTruckOwnerList = session.createCriteria(FoodTruckOwner.class)
-							.add(Restrictions.eq("user", user))
-							.list();
-					System.out.println("profile2"+userList.size());
+					FoodTruckOwner truck_owner = new FoodTruckOwner();
+					List<FoodTruckOwner> foodTruckOwnerList = session.createCriteria(FoodTruckOwner.class)
+						.list();
+					for(FoodTruckOwner foodtruckowner : foodTruckOwnerList) {
+						//System.out.println(foodtruckowner.getUser().getUser_name());
+						if(foodtruckowner.getUser().getUser_name().equals(user.getUser_name())) {
+							//System.out.println("truck find");
+							truck_owner = foodtruckowner;							}
+					}
+					//System.out.println("profile2"+userList.size());
 					session.persist(user);
-					FoodTruckOwner truck_owner =  foodTruckOwnerList.get(0);
 				
-					truck_owner.setTruck_name(request.getParameter("user_name"));
-					truck_owner.setZip_code(Integer.parseInt(request.getParameter("zipcode")));
+					
 					truck_owner.setPhone(request.getParameter("phone"));
 					
 					
@@ -108,7 +103,6 @@ public class EditProfileServlet extends HttpServlet {
 					String[] payment = request.getParameterValues("payment");
 					
 					truck_owner.setAccepted_payments(String.join(",",payment ));
-					truck_owner.setIs_moving(false);
 					truck_owner.setAddress_line_1(request.getParameter("address1"));
 					truck_owner.setAddress_line_2(request.getParameter("address2"));
 					truck_owner.setCity(request.getParameter("city"));
@@ -116,11 +110,27 @@ public class EditProfileServlet extends HttpServlet {
 					session.update(truck_owner);
 					session.getTransaction().commit();
 					
-				}
-				System.out.println("Go to profile");
-				request.setAttribute("user", user);
-				doGet(request, response);
+					System.out.println("Go to  truck profile");
+					request.setAttribute("user", user);
+					request.setAttribute("msg", "Your profile is updated successfully!");
+					request.setAttribute("truck", truck_owner);
+					request.setAttribute("cuisine", truck_owner.getCuisine());
+					request.setAttribute("days", truck_owner.getDays());
+					request.setAttribute("payments", truck_owner.getAccepted_payments());
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsps/profile-truckowner.jsp");
+					dispatcher.forward(request, response);
+					return;	
 					
+				}
+				else {
+				System.out.println("Go to  user profile");
+				request.setAttribute("user", user);
+				request.setAttribute("msg", "Your profile is updated successfully!");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsps/profile.jsp");
+				dispatcher.forward(request, response);
+				return;	
+				}
+				
 		} catch (Exception e) {
 			tx.rollback();
 			e.printStackTrace();
@@ -129,6 +139,14 @@ public class EditProfileServlet extends HttpServlet {
 			session.close();
 			
 		}
+		
+	}
+	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		
 	}
 

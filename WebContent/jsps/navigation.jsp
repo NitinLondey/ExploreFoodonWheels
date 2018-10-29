@@ -45,6 +45,7 @@
 					%>
 					<li><a	href="${pageContext.request.contextPath}/SearchFoodTruck.do">Search Food Truck</a></li>
 					<li><a	href="${pageContext.request.contextPath}/EventsFoodTruck.do">Food Truck Events</a></li>
+					<li><a href="${pageContext.request.contextPath}/profile">My Profile</a></li>
 					<%
 						}
 					%>
@@ -55,8 +56,12 @@
 						href="${pageContext.request.contextPath}/HomePage">Home</a></li>
 					<li><a href="8_menucard.html">Menu card</a></li>
 					<li><a href="9_events.html">Events</a></li>
-					<li><a href="${pageContext.request.contextPath}/profile">My
-							Profile</a></li>
+					<li class="dropdown active"><a class="dropdown-toggle">Account</a>
+						<ul class="dropdown-menu">
+							<li><a href="${pageContext.request.contextPath}/profile">My Profile</a></li>
+							<li><a href="${pageContext.request.contextPath}/Zipcode">Update zipcode</a></li>
+							<li><a href="${pageContext.request.contextPath}/MovingStatus">Moving status</a></li>
+						</ul></li>
 					
 					<%
 						}
