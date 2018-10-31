@@ -67,7 +67,6 @@ public class EditProfileServlet extends HttpServlet {
 					httpSession.setAttribute("zipcode", Integer.parseInt(request.getParameter("zipcode")));	
 				}
 				user.setPhone(request.getParameter("phone"));
-				user.setEmail(request.getParameter("email"));
 				session.update(user);
 				tx.commit();
 				

@@ -40,13 +40,15 @@
 		<form class="simpleForm" action="${pageContext.request.contextPath}/EditProfileServlet.do" id = "signup-form">
            <fieldset>
         <div class="row nomargin">
+        	<p style="color:yellow; font-weight: 1000">${msg }</p>
+       		</div>
+       		
+       	<div class="row nomargin">
           <div class="col-md-5">
-           
-            <p style="color:yellow; font-weight: 900">${msg }</p>
-
                 <div class="form-group">
                   <label>User name: ${user.user_name }</label>
                 </div>
+                
                  <div class="form-group">
                   <label>First name</label>
                   <input type="text" class="form-control" name="first_name" value="${user.firstname }" placeholder="enter your first name">
@@ -63,10 +65,7 @@
                   <label>Address Line 2</label>
                   <input type="text"  class="form-control" name="address2" value="${user.address_line_2 }" placeholder="enter your  address 2">
                 </div>
-                <div class="form-group">
-                  <label>City</label>
-                  <input type="text" class="form-control" name="city" value="${user.city }" placeholder="enter your  city">
-                </div>
+                
                 
               
 
@@ -74,9 +73,13 @@
           <div class="col-md-2">
           </div>
           <div class="col-md-5">
-            	<div class="space50px"></div>
-            	<div class="space25px"></div>
-		
+          		<div class="form-group">
+                  <label>Email: ${user.email}</label>
+                </div>
+            	<div class="form-group">
+                  <label>City</label>
+                  <input type="text" class="form-control" name="city" value="${user.city }" placeholder="enter your  city">
+                </div>
                 <div class="form-group">
                   <label>State</label>
                   <input type="text" class="form-control" name="state"  value="${user.state }" placeholder="enter your state">
@@ -89,10 +92,6 @@
                   <label>Phone</label>
                    <input type="tel" placeholder="1234567890"
             required class="form-control" name="phone" value="${user.phone }" placeholder="enter your phone">
-                </div>
-           	<div class="form-group">
-                  <label>Email</label>
-                   <input type="email" class="form-control" name="email" value="${user.email }" placeholder="enter your email">
                 </div>
            
                

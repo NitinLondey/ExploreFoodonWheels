@@ -40,8 +40,10 @@
 		<form class="simpleForm" action="${pageContext.request.contextPath}/EditProfileServlet.do" id = "signup-form" >
            <fieldset>
         <div class="row nomargin">
+        	 <p style="color:yellow; font-weight: 1000">${msg }</p>
+       		</div>
+       	<div class="row nomargin">
           <div class="col-md-5">
-            <p style="color:yellow; font-weight: 900">${msg }</p>
                 <div class="form-group">
                   <label>Food Truck name: ${user.user_name }</label>
                 </div>
@@ -75,23 +77,16 @@
                   <label>Phone</label>
                    <input type="tel" placeholder="123-456-7890" value="${user.phone }" class="form-control" name="phone" >
                 </div>
-                
-                <div class="form-group">
-                  <label>Email</label>
-                   <input type="email"  class="form-control" name="email" value="${user.email }" placeholder="enter your email">
-                </div>
-        
           </div>
+          
           <div class="col-md-2">
           </div>
+          
           <div class="col-md-5">
-            
-
-			<div class="space25px"></div>
-			<div class="space50px" style="height:46px"></div>
-	
-           
-           	
+          
+			<div class="form-group">
+                  <label>Email: ${user.email}</label>
+                </div>
            
                 <div class="form-group">
                 	<label>Cuisine</label>
