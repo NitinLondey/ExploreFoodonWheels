@@ -54,7 +54,7 @@
 					%>
 					<li class="active"><a
 						href="${pageContext.request.contextPath}/HomePage">Home</a></li>
-					<li><a href="8_menucard.html">Menu card</a></li>
+					<li > <a href="${pageContext.request.contextPath}/AddMenu.do">Menu card</a></li>
 					<li><a href="9_events.html">Events</a></li>
 					<li class="dropdown active"><a class="dropdown-toggle">Account</a>
 						<ul class="dropdown-menu">
