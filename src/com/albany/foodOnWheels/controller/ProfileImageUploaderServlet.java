@@ -54,7 +54,7 @@ public class ProfileImageUploaderServlet extends HttpServlet {
 			HttpSession httpSession = request.getSession();
 			String truckowner = (String) httpSession.getAttribute("user_name");
 
-			directory = request.getSession().getServletContext().getRealPath("/") + "images/";
+			directory = request.getSession().getServletContext().getRealPath("/") + "images\\";
 			System.out.println("menu upload" + directory);
 			ServletFileUpload.isMultipartContent(request);
 			response.setContentType("image");
