@@ -46,8 +46,11 @@
             <p style="color:yellow; font-weight: 900">${FBname } <br/> ${msg }</p>
                 <div class="form-group">
                   <label>Food Truck name</label>
-                  <input type="text"  class="form-control" name="user_name" placeholder="enter food truck name">
+                  <input type="text"  id="user_name"  class="form-control" name="user_name" placeholder="enter food truck name">
                 </div>
+                <div id="message_name">
+				  <p id="isRepeat" class="invalid">User name must not be repeat</p>
+				</div>
                  <div class="form-group">
                   <label>First name</label>
                   <input type="text"  class="form-control" name="first_name" value="${user.firstname }" placeholder="enter your first name">
@@ -201,7 +204,70 @@ function submitForm(){
 }
 
 
+//name repeat?
+var uerName = document.getElementById("user_name");
+var isRepeat = document.getElementById("isRepeat");
+function getXHR(){
+	var xmlHttp;
+	try {
+		xmlHttp=new XMLHttpRequest();
+	}catch(e)
+	{
+		try{
+			xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");
+		}
+		catch(e)
+		{
+			try{
+				xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			catch(e)
+			{
+				alert("ajax");
+				return false;
+			}
+			
+		}
+		
+	}
+	return xmlHttp;
+}
 
+uerName.onfocus = function() { 
+	document.getElementById("message_name").style.display = "none";
+}
+uerName.onblur = function() {
+	var xhr=getXHR();
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4)
+			{
+			if(xhr.status==200)
+				{
+				/* alert(xhr.responseText); */
+				if(xhr.responseText!="exist"){
+					document.getElementById("message_name").style.display = "none";
+				}else{
+					document.getElementById("message_name").style.display = "block";
+				}
+
+				}
+			}
+	}
+	xhr.open("POST","${pageContext.request.contextPath}/AjaxServlet.do"+"?user_name="+uerName.value);
+	xhr.send();
+
+	
+}
+uerName.onkeyup = function() {
+	  if(uerName.value=="xxx") {  
+		  isRepeat.classList.remove("invalid");
+		  isRepeat.classList.add("valid");
+	  } else {
+		  isRepeat.classList.remove("valid");
+		  isRepeat.classList.add("invalid");
+	  }
+}
+//pwd
 var myInput = document.getElementById("psw");
 var letter = document.getElementById("letter");
 var capital = document.getElementById("capital");
@@ -285,6 +351,20 @@ confirm_password.onkeyup = validatePassword;
 }
 
 #message p {
+    padding: 10px 35px;
+    font-size: 18px;
+}
+
+#message_name {
+    display:none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+#message_name p {
     padding: 10px 35px;
     font-size: 18px;
 }

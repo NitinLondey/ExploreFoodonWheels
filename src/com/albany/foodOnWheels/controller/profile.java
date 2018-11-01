@@ -84,7 +84,7 @@ public class profile extends HttpServlet {
 				request.setAttribute("cuisine", truck_owner.getCuisine());
 				request.setAttribute("days", truck_owner.getDays());
 				request.setAttribute("payments", truck_owner.getAccepted_payments());
-				
+				request.setAttribute("fileName", truck_owner.getImage_path());
 				request.getRequestDispatcher("/jsps/profile-truckowner.jsp").forward(request, response);
 				return; 
 			}

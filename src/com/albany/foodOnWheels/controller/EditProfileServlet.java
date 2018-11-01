@@ -116,6 +116,7 @@ public class EditProfileServlet extends HttpServlet {
 					request.setAttribute("cuisine", truck_owner.getCuisine());
 					request.setAttribute("days", truck_owner.getDays());
 					request.setAttribute("payments", truck_owner.getAccepted_payments());
+					request.setAttribute("fileName", truck_owner.getImage_path());
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsps/profile-truckowner.jsp");
 					dispatcher.forward(request, response);
 					return;	

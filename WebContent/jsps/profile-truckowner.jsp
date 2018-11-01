@@ -130,10 +130,29 @@
 
             <input class="btn btn-default" type="button" value="Save Change" onclick="submitForm();">
            
+           
+           
           </div>
         </div>
         </fieldset>
        </form>
+       <div>
+           			<p>
+						<img id ="imgs" class="menudetails" src="${pageContext.request.contextPath}/images/${fileName}"
+							/>
+							
+					</p>
+					<form class="formdata"
+						action="${pageContext.request.contextPath}/ProfileImageUploaderServlet.do"
+						method="post" enctype="multipart/form-data">
+
+						
+						<input id="hidden" type="hidden" name="cuisinename" value="${list}"/>
+						
+						<input class="choosefilebtn" id="file" type="file" name="file" size="50" onchange="onSubmitimage(event);"/>
+						<input class="submitfilebtn" type="submit" value="Upload File" />
+					</form>
+           </div>
       </div>
       <!-- / easyBox -->
 
@@ -150,6 +169,13 @@
 </body>
 
 <script>
+	
+function onSubmitimage(event){
+	
+	   $("#imgs").attr('src',URL.createObjectURL(event.target.files[0])); 
+	}
+	
+	
 window.onload = function(){
 	var cuisine = '<%=request.getAttribute("cuisine")%>';
 	var day = '<%=request.getAttribute("days")%>';
