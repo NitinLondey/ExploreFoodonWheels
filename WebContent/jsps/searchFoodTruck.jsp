@@ -67,7 +67,14 @@
         	<div class="row nomargin">
           	<div class="col-md-4">
           		<div class="frameImg">
-          		<img src="${pageContext.request.contextPath}/images/demo-content/product-1.jpg" alt=" ">
+          		<c:choose>
+          		<c:when test="${foodTruck.image_path == null}">
+          			<img src="${pageContext.request.contextPath}/images/demo-content/product-1.jpg" alt=" ">
+          		</c:when>
+          		<c:otherwise>
+          		<img src="${pageContext.request.contextPath}/images/${foodTruck.image_path}" alt=" ">
+          		</c:otherwise>
+          		</c:choose>
           		</div>
 			</div>
 			<div class="col-md-8">

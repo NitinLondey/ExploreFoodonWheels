@@ -139,9 +139,10 @@
        <div>
            			<p>
 						<img id ="imgs" class="menudetails" src="${pageContext.request.contextPath}/images/${fileName}"
-							/>
+							/><br>
 							
 					</p>
+					<h6>Upload the image of food truck here!</h6>
 					<form class="formdata"
 						action="${pageContext.request.contextPath}/ProfileImageUploaderServlet.do"
 						method="post" enctype="multipart/form-data">
