@@ -21,17 +21,13 @@
 	<style>
 .menudetails {
 	display: block;
-	width: 100%;
 	padding-bottom: 4px;
 	padding-left: 6px;
-	height:100%;
 }
 
 .menuimages {
-	width: 100%;
 	padding-top: 48px;
 	display: block;
-	height:100%;
 }
 
 .title {
@@ -62,7 +58,7 @@
 	text-align: center;
 	margin-bottom: 20px;
 	text-transform: uppercase;
-	margin-top:5px;
+	margin-top: 5px;
 }
 
 .menuheader1 {
@@ -81,15 +77,17 @@
 	margin-left: 6px;
 }
 
-.mainrow{
-  background-color: rgba(255, 94, 0, 0.7);
-    border-color: #061551;
-    margin-left: 53px;
-    margin-right: 53px;
-
+.mainrow {
+	background-color: rgba(255, 94, 0, 0.7);
+	border-color: #061551;
+	margin-left: 53px;
+	margin-right: 53px;
 }
 </style>
+
+
 	<%@include file="/jsps/navigation.jsp"%>
+
 	<div class="bg-1 section">
 		<div class="title">
 			<h1>Add a Menu</h1>
@@ -100,30 +98,33 @@
 					<p>
 						<span class="menuheader"><c:out value="${list}" /></span>
 					</p>
-					
-					<p>
-						<img id ="imgs" class="menudetails"
-							/>
-							
-					</p>
-					<form class="formdata"
-						action="${pageContext.request.contextPath}/ImageUploaderServlet.do"
-						method="post" enctype="multipart/form-data">
-
-						
-							<input id="hidden" type="hidden" name="cuisinename" value="${list}"/>
-						
-						<input class="choosefilebtn" id="file" type="file" name="file" size="50" onchange="onSubmit(event);"/>
-						<input class="submitfilebtn" type="submit" value="Upload File" />
-					</form>
 
 				</c:forEach>
+				<p>
+					<img id="imgs" class="menuimages"
+						src="${pageContext.request.contextPath}/images/${fileName}">
+				</p>
+				
+
+				<form class="formdata"
+					action="${pageContext.request.contextPath}/ImageUploaderServlet.do"
+					method="post" enctype="multipart/form-data" id="menuadd">
+
+
+					<input id="hidden" type="hidden" name="cuisinename" value="${list}" />
+
+					<input class="choosefilebtn" id="file" type="file" name="file"
+						size="50" onchange="onSubmit(event);" /> <input
+						class="submitfilebtn" type="submit" value="Upload File" />
+				</form>
+
+				
+
 			</div>
-			<div class="col-lg-5 col-md-5">
+			<%-- <div class="col-lg-5 col-md-5">
 				<c:forEach begin="1" end="${count}">
 					<p>
-						<img id="imgs1" class="menuimages" src="${pageContext.request.contextPath}/images/${fileName}">
-
+						
 					</p>
 					<form class="formdata"
 						action="${pageContext.request.contextPath}/ImageUploaderServlet.do"
@@ -136,7 +137,7 @@
 
 
 
-			</div>
+			</div> --%>
 
 		</div>
 
@@ -147,18 +148,19 @@
 </body>
 
 <script>
-function onSubmit(event) {
-	
-	   $("#imgs").attr('src',URL.createObjectURL(event.target.files[0])); 
+	function onSubmit(event) {
+
+		$("#imgs").attr('src', URL.createObjectURL(event.target.files[0]));
 	}
-	
-function onSubmitimage(event){
-	
-	   $("#imgs1").attr('src',URL.createObjectURL(event.target.files[0])); 
+
+	function onSubmitimage(event) {
+
+		$("#imgs1").attr('src', URL.createObjectURL(event.target.files[0]));
 	}
-	
-	
-	
+	function submitForm() {
+		form = document.getElementById("menuadd");
+		form.submit();
+	}
 </script>
 
 </html>

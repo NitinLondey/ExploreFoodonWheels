@@ -1,8 +1,7 @@
 package com.albany.foodOnWheels.controller;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
+
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -17,17 +16,14 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
 import com.albany.foodOnWheels.model.FoodTruckOwner;
 import com.albany.foodOnWheels.model.Menu;
-import com.albany.foodOnWheels.model.User;
 import com.services.Connection;
 
-import java.io.PrintWriter;
 
 /**
- * Servlet implementation class ImageUpload
+ * Servlet implementation of add menu
  */
 @WebServlet({ "/AddMenu", "/AddMenu.do" })
 public class AddMenu extends HttpServlet {
@@ -76,30 +72,21 @@ public class AddMenu extends HttpServlet {
 				}
 				int lengthoflist=list.size();
 				request.setAttribute("list", list);
+				
 				request.setAttribute("count", lengthoflist);
 				System.out.println("**************************");
-				String images=null;
+				String fileName=null;
 				List<Menu> menudetails = session.createCriteria(Menu.class).list();
 				for (Menu m : menudetails) {
-					if (m.getTruck_name().equals(truckowner) && !m.getImage_path().isEmpty()) {
+					if (m.getTruck_name().equals(truckowner)) {
 			
-						images=m.getImage_path();
+						fileName=m.getImage_path();
+						System.out.println(fileName);
 					}
 				}
-
-				session.getTransaction().commit();
-				
-
-				List<String> list2=new ArrayList<String>();
-				if(images!=null) {
-					String s[]=images.split(",");
-					for(int i=0;i<s.length;i++) {
-						list2.add(s[i]);
-					}
-				request.setAttribute("listofsavedimages", list2);
-				}
-				
-				
+			
+				request.setAttribute("fileName", fileName);
+				httpSession.setAttribute("list", list);
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsps/menuCard.jsp");
 				dispatcher.forward(request, response);
 				return;
