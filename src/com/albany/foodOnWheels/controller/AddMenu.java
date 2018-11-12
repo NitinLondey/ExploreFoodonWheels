@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 import com.albany.foodOnWheels.model.FoodTruckOwner;
 import com.albany.foodOnWheels.model.Menu;
@@ -46,7 +47,7 @@ public class AddMenu extends HttpServlet {
 
 		HttpSession httpSession = request.getSession();
 		String truckowner = (String) httpSession.getAttribute("user_name");
-		System.out.println(truckowner);
+		
 		Session session = null;
 		Transaction tx = null;
 		SessionFactory sessionFactory = Connection.getSessionFactory();
@@ -55,13 +56,11 @@ public class AddMenu extends HttpServlet {
 			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
 			String cuisine = null;
-			List<FoodTruckOwner> userList = session.createCriteria(FoodTruckOwner.class).list();
-			System.out.println(userList.size());
+			List<FoodTruckOwner> userList = session.createCriteria(FoodTruckOwner.class)
+					.add(Restrictions.eq("truck_name", truckowner)).list();
+			
 			for (FoodTruckOwner fto : userList) {
-
-				if (fto.getUser().getUser_name().equals(truckowner)) {
 					cuisine = fto.getCuisine();
-				}
 			}
 			if (cuisine != null) {
 				List<String> list = new ArrayList<String>();
@@ -76,15 +75,11 @@ public class AddMenu extends HttpServlet {
 				request.setAttribute("count", lengthoflist);
 				System.out.println("**************************");
 				String fileName=null;
-				List<Menu> menudetails = session.createCriteria(Menu.class).list();
+				List<Menu> menudetails = session.createCriteria(Menu.class)
+						.add(Restrictions.eq("truck_name", truckowner)).list();
 				for (Menu m : menudetails) {
-					if (m.getTruck_name().equals(truckowner)) {
-			
 						fileName=m.getImage_path();
-						System.out.println(fileName);
-					}
 				}
-			
 				request.setAttribute("fileName", fileName);
 				httpSession.setAttribute("list", list);
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsps/menuCard.jsp");

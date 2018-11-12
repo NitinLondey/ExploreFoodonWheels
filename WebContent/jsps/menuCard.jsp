@@ -87,7 +87,17 @@
 
 
 	<%@include file="/jsps/navigation.jsp"%>
-
+	
+<%if((request.getAttribute("message")!=null))
+      {
+    	  %>
+      <div class="errorMsg">
+              <%= request.getAttribute("message") %>
+	</div>
+      <%
+		request.setAttribute("message", null);
+	} %>
+	
 	<div class="bg-1 section">
 		<div class="title">
 			<h1>Add a Menu</h1>
@@ -102,7 +112,7 @@
 				</c:forEach>
 				<p>
 					<img id="imgs" class="menuimages"
-						src="${pageContext.request.contextPath}/images/${fileName}">
+						src="${pageContext.request.contextPath}/uploads/${fileName}">
 				</p>
 				
 
@@ -118,29 +128,9 @@
 						class="submitfilebtn" type="submit" value="Upload File" />
 				</form>
 
-				
-
 			</div>
-			<%-- <div class="col-lg-5 col-md-5">
-				<c:forEach begin="1" end="${count}">
-					<p>
-						
-					</p>
-					<form class="formdata"
-						action="${pageContext.request.contextPath}/ImageUploaderServlet.do"
-						method="post" enctype="multipart/form-data">
-						<input class="choosefilebtn" type="file" name="file" size="50" onchange="onSubmitimage(event);" />
-						<input class="submitfilebtn" type="submit" value="Upload File"  />
-					</form>
-
-				</c:forEach>
-
-
-
-			</div> --%>
-
+			
 		</div>
-
 
 	</div>
 
