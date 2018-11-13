@@ -37,11 +37,11 @@
       <div class="easyBox full">
 
         <h4 class="hdr5"><span>Food Festival Information</span></h4>
-		<form class="simpleForm" action="${pageContext.request.contextPath}/AddEventsServlet.do" id = "signup-form" >
+		<form class="formdata"
+					action="${pageContext.request.contextPath}/AddEventsServlet.do"
+					method="post" enctype="multipart/form-data" id="imageadd">
            <fieldset>
-        <div class="row nomargin">
-        	 <p style="color:yellow; font-weight: 1000">${msg }</p>
-       		</div>
+        
        	<div class="row nomargin">
           <div class="col-md-5">
                 <div class="form-group">
@@ -62,7 +62,6 @@
                   <input type="text"  class="form-control" name="address"  placeholder="enter the food festival address">
                 </div>
                 
-                <input class="btn btn-default" type="button" value="Submit" onclick="submitForm();">
           	</div>
         
         	<div class="col-md-2">
@@ -91,6 +90,23 @@
             </div>
            
         </div>
+        <div class="row nomargin">
+         
+          		
+				<div class="frameImg">
+					<img id="imgs" class="menuimages"
+						src="">
+				</div>
+				<h6>Upload a image for your food festival here!</h6>
+				
+					<input id="hidden" type="hidden" name="eventId" value="${eventId}" />
+
+					<input class="choosefilebtn" id="file" type="file" name="file"
+						size="50" onchange="onSubmit(event);" /> 
+			  <input class="btn btn-default" type="submit" value="Submit"/>
+
+			
+		</div>
         </fieldset>
        </form>
        
@@ -111,18 +127,16 @@
 
 <script>
 	
-function onSubmitimage(event){
-	
-	   $("#imgs").attr('src',URL.createObjectURL(event.target.files[0])); 
+	function onSubmit(event) {
+		$("#imgs").attr('src', URL.createObjectURL(event.target.files[0]));
 	}
-	
-	
-
-
-function submitForm(){
-	document.getElementById("signup-form").submit();
-}
-
+	function onSubmitimage(event) {
+		$("#imgs1").attr('src', URL.createObjectURL(event.target.files[0]));
+	}
+	function submitForm() {
+		form = document.getElementById("imageadd");
+		form.submit();
+	}
 
 
 var myInput = document.getElementById("psw");

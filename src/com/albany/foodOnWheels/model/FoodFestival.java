@@ -56,7 +56,7 @@ public class FoodFestival {
 	private String image_path;
 	
 	@Column(name="approved")
-	private boolean approved;
+	private String approved;
 	
 	public Integer getId() {
 		return id;
@@ -146,12 +146,14 @@ public class FoodFestival {
 		this.image_path = image_path;
 	}
 
-	public boolean isApproved() {
+	public String getApproved() {
 		return approved;
 	}
 
-	public void setApproved(boolean approved) {
+	public void setApproved(String approved) {
 		this.approved = approved;
 	}
+
+	
 
 }

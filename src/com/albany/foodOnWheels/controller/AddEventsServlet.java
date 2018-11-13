@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ import com.services.ImageUpload;
  * Servlet implementation class AddEventsServlet
  */
 @WebServlet({"/AddEventsServlet","/AddEventsServlet.do"})
+@MultipartConfig
 public class AddEventsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,8 +45,19 @@ public class AddEventsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+
+		String fileName = ImageUpload.imageUpload(request);
+		
 		HttpSession httpSession = request.getSession();
-	
+		
 		String username = (String) httpSession.getAttribute("user_name");
 		String name = request.getParameter("festival_name");
 		String sDate = request.getParameter("start_date");
@@ -79,8 +92,9 @@ public class AddEventsServlet extends HttpServlet {
 		foodfestival.setHours(request.getParameter("hours"));
 		foodfestival.setCity(request.getParameter("city"));
 		foodfestival.setState(request.getParameter("state"));
+		foodfestival.setImage_path(fileName);
 		foodfestival.setZip_code(Integer.parseInt(request.getParameter("zipcode")));
-		foodfestival.setApproved(false);
+		foodfestival.setApproved("processing");
 		
 		SessionFactory sessionFactory = Connection.getSessionFactory();
 		Session session = sessionFactory.openSession();
@@ -91,36 +105,8 @@ public class AddEventsServlet extends HttpServlet {
 		session.close();
 		System.out.println("add events ");
 		
-		request.setAttribute("message", "Food Festival sumbitted successfully");
-		request.setAttribute("eventId", foodfestival.getId());
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsps/eventImage.jsp");
-		dispatcher.forward(request, response);
-		return;
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
-		String fileName = ImageUpload.imageUpload(request);
-		
-		String eventId = request.getParameter("eventId");
-	    SessionFactory sessionFactory = Connection.getSessionFactory();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		
-		List<FoodFestival> eventLists = session.createCriteria(FoodFestival.class)
-				.add(Restrictions.eq("id", eventId)).list();
-		
-		FoodFestival foodfestival = eventLists.get(0);
-		foodfestival.setImage_path(fileName);
-		session.update(foodfestival);
-		session.getTransaction().commit();
-		
 		request.setAttribute("message", "Food Festival added successfully");
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsps/myFoodFestival.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/showFoodFestivals");
 		dispatcher.forward(request, response);
 		return;
 
