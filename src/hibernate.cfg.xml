@@ -18,6 +18,7 @@
 		<mapping class="com.albany.foodOnWheels.model.FoodTruckOwner" />
 		<mapping class="com.albany.foodOnWheels.model.Menu" />
 		<mapping class="com.albany.foodOnWheels.model.Offers" />
+		<mapping class="com.albany.foodOnWheels.model.FoodFestival" />
 
 
 	</session-factory>

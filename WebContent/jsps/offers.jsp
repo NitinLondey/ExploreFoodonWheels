@@ -87,6 +87,18 @@
 
 
 	<%@include file="/jsps/navigation.jsp"%>
+	
+	
+	<%
+		if ((request.getAttribute("message") != null)) {
+	%>
+	<div class="errorMsg">
+		<%=request.getAttribute("message")%>
+	</div>
+	<%
+		request.setAttribute("message", null);
+		}
+	%>
 
 	<div class="bg-1 section">
 		<div class="inner" data-topspace="45" data-bottomspace="35"
