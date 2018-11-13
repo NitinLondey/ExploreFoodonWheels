@@ -17,6 +17,8 @@
 		<mapping class="com.albany.foodOnWheels.model.User" />
 		<mapping class="com.albany.foodOnWheels.model.FoodTruckOwner" />
 		<mapping class="com.albany.foodOnWheels.model.Menu" />
+		<mapping class="com.albany.foodOnWheels.model.Offers" />
+
 
 	</session-factory>
 </hibernate-configuration>

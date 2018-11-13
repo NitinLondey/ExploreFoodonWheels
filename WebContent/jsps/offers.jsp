@@ -10,7 +10,7 @@
 	content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1, shrink-to-fit=no">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<title>Menu</title>
+<title>Offers</title>
 
 <%@include file="/jsps/header.jsp"%>
 
@@ -88,55 +88,37 @@
 
 	<%@include file="/jsps/navigation.jsp"%>
 
-	<%
-		if ((request.getAttribute("message") != null)) {
-	%>
-	<div class="errorMsg">
-		<%=request.getAttribute("message")%>
-	</div>
-	<%
-		request.setAttribute("message", null);
-		}
-	%>
-
 	<div class="bg-1 section">
 		<div class="inner" data-topspace="45" data-bottomspace="35"
 			data-image="assets/flavours/tacos/images/demo-content/background-6.jpg">
 
 			<div class="container">
-				<h3 class="hdr1">Add a Menu</h3>
+				<h3 class="hdr1">Add Offers</h3>
 
 				<div class="row mainrow">
 					<div class="col-lg-5 col-md-5 ">
-						<c:forEach var="list" items="${list}">
+		
 							<p>
-								<span class="menuheader"><c:out value="${list}" /></span>
-							</p>
-
-						</c:forEach>
-						<p>
 							<img id="imgs" class="menuimages"
 								src="${pageContext.request.contextPath}/uploads/${fileName}">
 						</p>
 
-
 						<form class="formdata"
-							action="${pageContext.request.contextPath}/ImageUploaderServlet.do"
-							method="post" enctype="multipart/form-data" id="menuadd">
+							action="${pageContext.request.contextPath}/OfferImageUploaderServlet.do"
+							method="post" enctype="multipart/form-data">
 
 
-							<input id="hidden" type="hidden" name="cuisinename"
-								value="${list}" /> <input class="choosefilebtn" id="file"
-								type="file" name="file" size="50" onchange="onSubmit(event);" />
-							<input class="submitfilebtn" type="submit" value="Upload File" />
+							<input class="choosefilebtn" id="file" type="file" name="file"
+								size="50" onchange="onSubmit(event);" /> <input
+								class="submitfilebtn" type="submit" value="Upload File" />
 						</form>
-
 					</div>
-
 				</div>
+
 
 			</div>
 		</div>
+
 
 	</div>
 	<%@include file="/jsps/footer.jsp"%>
@@ -144,14 +126,8 @@
 
 <script>
 	function onSubmit(event) {
+
 		$("#imgs").attr('src', URL.createObjectURL(event.target.files[0]));
-	}
-	function onSubmitimage(event) {
-		$("#imgs1").attr('src', URL.createObjectURL(event.target.files[0]));
-	}
-	function submitForm() {
-		form = document.getElementById("menuadd");
-		form.submit();
 	}
 </script>
 

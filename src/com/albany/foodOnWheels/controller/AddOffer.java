@@ -18,20 +18,19 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
-import com.albany.foodOnWheels.constants.Constant;
 import com.albany.foodOnWheels.model.FoodTruckOwner;
-import com.albany.foodOnWheels.model.Menu;
+import com.albany.foodOnWheels.model.Offers;
 import com.services.Connection;
 
 
 /**
  * Servlet implementation of add menu
  */
-@WebServlet({ "/AddMenu", "/AddMenu.do" })
-public class AddMenu extends HttpServlet {
+@WebServlet({ "/AddOffer", "/AddOffer.do" })
+public class AddOffer extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	public AddMenu() {
+	public AddOffer() {
 		super();
 
 	}
@@ -47,8 +46,9 @@ public class AddMenu extends HttpServlet {
 
 
 		HttpSession httpSession = request.getSession();
+		System.out.println("inside offers");
 		String truckowner = (String) httpSession.getAttribute("user_name");
-		
+		System.out.println(truckowner);
 		Session session = null;
 		Transaction tx = null;
 		SessionFactory sessionFactory = Connection.getSessionFactory();
@@ -57,14 +57,13 @@ public class AddMenu extends HttpServlet {
 			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
 			String cuisine = null;
-			List<FoodTruckOwner> userList = session.createCriteria(FoodTruckOwner.class)
-					.add(Restrictions.eq("truck_name", truckowner)).list();
-			
-			for (FoodTruckOwner fto : userList) {
+			List<FoodTruckOwner> userList = session.createCriteria(FoodTruckOwner.class).add(Restrictions.eq("truck_name", truckowner)).list();
+					FoodTruckOwner fto=userList.get(0);
+					if(fto.getCuisine()!=null) {
 					cuisine = fto.getCuisine();
-			}
+				}
+			List<String> list = new ArrayList<String>();
 			if (cuisine != null) {
-				List<String> list = new ArrayList<String>();
 				String listofCuisine[] = cuisine.split(",");
 				for (int i = 0; i < listofCuisine.length; i++) {
 					list.add(listofCuisine[i]);
@@ -72,23 +71,24 @@ public class AddMenu extends HttpServlet {
 				}
 				int lengthoflist=list.size();
 				request.setAttribute("list", list);
-				
+			
 				request.setAttribute("count", lengthoflist);
-				System.out.println("**************************");
-				String fileName="";
-;
-				List<Menu> menudetails = session.createCriteria(Menu.class)
-						.add(Restrictions.eq("truck_name", truckowner)).list();
-				for (Menu m : menudetails) {
-						fileName=m.getImage_path();
+			}
+				String fileName=null;
+				List<Offers> offerdetails = session.createCriteria(Offers.class).add(Restrictions.eq("truck_name", truckowner)).list();;
+				if(!offerdetails.isEmpty()) {
+					Offers offers=offerdetails.get(0);
+				if(offers.getImage_path()!=null) {
+					fileName=offers.getImage_path();
+			}			
 				}
-				System.out.println("add menu"+fileName);
+				System.out.println("inside add offers" +fileName);
 				request.setAttribute("fileName", fileName);
 				httpSession.setAttribute("list", list);
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsps/menuCard.jsp");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsps/offers.jsp");
 				dispatcher.forward(request, response);
 				return;
-			}
+			
 
 		} catch (Exception ex) {
 			tx.rollback();
