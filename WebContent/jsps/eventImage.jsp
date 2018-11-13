@@ -92,16 +92,11 @@
 	
 	<div class="bg-1 section">
 		<div class="title">
-			<h1>Add a Menu</h1>
+			<h1>Add a Image For Food Festival</h1>
 		</div>
 		<div class="row mainrow">
 			<div class="col-lg-5 col-md-5 ">
-				<c:forEach var="list" items="${list}">
-					<p>
-						<span class="menuheader"><c:out value="${list}" /></span>
-					</p>
-
-				</c:forEach>
+				
 				<p>
 					<img id="imgs" class="menuimages"
 						src="${pageContext.request.contextPath}/uploads/${fileName}">
@@ -109,11 +104,11 @@
 				
 
 				<form class="formdata"
-					action="${pageContext.request.contextPath}/ImageUploaderServlet.do"
+					action="${pageContext.request.contextPath}/AddEventsServlet.do"
 					method="post" enctype="multipart/form-data" id="menuadd">
 
 
-					<input id="hidden" type="hidden" name="cuisinename" value="${list}" />
+					<input id="hidden" type="hidden" name="eventId" value="${eventId}" />
 
 					<input class="choosefilebtn" id="file" type="file" name="file"
 						size="50" onchange="onSubmit(event);" /> <input

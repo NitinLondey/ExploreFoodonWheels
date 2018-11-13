@@ -78,9 +78,11 @@ public class ProfileImageUploaderServlet extends HttpServlet {
 					System.out.println(fileName);
 					System.out.println("file apth" + filepath);
 					if (fileName.lastIndexOf("\\") >= 0) {
-						file = new File(directory + fileName.substring(fileName.lastIndexOf("\\")));
+						fileName = fileName.substring(fileName.lastIndexOf("\\"));
+						file = new File(directory + fileName);
 					} else {
-						file = new File(directory + fileName.substring(fileName.lastIndexOf("\\") + 1));
+						fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
+						file = new File(directory + fileName);
 					}
 					fi.write(file);
 
@@ -110,9 +112,9 @@ public class ProfileImageUploaderServlet extends HttpServlet {
 					truck_owner = foodtruckowner;
 				}
 			}
-			System.out.println(directory);
-			System.out.println(filepath);
-			System.out.println(fileName);
+			System.out.println(directory + "1");
+			System.out.println(filepath + "2");
+			System.out.println(fileName +  "3");
 			truck_owner.setImage_path(fileName);
 			tx.commit();
 			

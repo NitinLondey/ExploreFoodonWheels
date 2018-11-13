@@ -138,7 +138,7 @@
        </form>
        <div>
            			<p>
-						<img id ="imgs" class="menudetails" src="${pageContext.request.contextPath}/images/${fileName}"
+						<img id ="imgs" class="menudetails" src="${pageContext.request.contextPath}/images${fileName}"
 							/><br>
 							
 					</p>

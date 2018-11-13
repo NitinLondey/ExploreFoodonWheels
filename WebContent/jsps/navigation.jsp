@@ -55,7 +55,12 @@
 					<li class="active"><a
 						href="${pageContext.request.contextPath}/HomePage">Home</a></li>
 					<li > <a href="${pageContext.request.contextPath}/AddMenu.do">Menu card</a></li>
-					<li><a href="9_events.html">Events</a></li>
+					<li class="dropdown active"><a class="dropdown-toggle">Food festival</a>
+						<ul class="dropdown-menu">
+							<li><a href="${pageContext.request.contextPath}/showFoodFestivals">My Food Festivals</a></li>
+							<li><a href="${pageContext.request.contextPath}/jsps/events.jsp">Add new Festival</a></li>
+						</ul></li>
+					
 					<li class="dropdown active"><a class="dropdown-toggle">Account</a>
 						<ul class="dropdown-menu">
 							<li><a href="${pageContext.request.contextPath}/profile">My Profile</a></li>
