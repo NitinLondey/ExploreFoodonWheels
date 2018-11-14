@@ -82,6 +82,8 @@
 					%>
 				<li><a	href="${pageContext.request.contextPath}/Request_center.do">Request
 							Center</a></li>
+							<li><a	href="${pageContext.request.contextPath}/ViewEventsServlet.do">Event
+							Center</a></li>
 					<%
 						}
 					%>

@@ -75,7 +75,7 @@ public class EmailServlet extends HttpServlet {
 					System.out.println("email id not correct");
 				}
 				else {
-				es.send(u1.getEmail(),approve);
+				es.send(u1.getEmail(),approve, "foodtruck");
 			
 				
 			/*	
