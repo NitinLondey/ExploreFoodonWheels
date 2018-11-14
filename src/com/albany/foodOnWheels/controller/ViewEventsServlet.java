@@ -53,6 +53,7 @@ public class ViewEventsServlet extends HttpServlet {
 			//String role = (String) httpsession.getAttribute("role");
 			
 				List<FoodFestival> truckowner = session.createCriteria(FoodFestival.class)
+						.add(Restrictions.or(Restrictions.eq("approved", "approved"), Restrictions.eq("approved", "processing")))
 						.list();
 				
 				System.out.println("^^^^" + truckowner.size());

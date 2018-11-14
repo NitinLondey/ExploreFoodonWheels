@@ -50,8 +50,14 @@ public class Eventmail extends HttpServlet {
 		Transaction tx = null;
 		SessionFactory sessionFactory = Connection.getSessionFactory();
 		try {
+			String approve=null;
+			if(request.getParameter("approval")==null) {
+				approve =request.getParameter("reject");
+			}else {
+				approve =request.getParameter("approval");
+			}
 			
-			String approve =request.getParameter("approval");	
+				
 			
 			
 			session = sessionFactory.openSession();
