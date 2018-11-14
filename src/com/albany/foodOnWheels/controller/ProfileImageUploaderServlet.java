@@ -7,7 +7,6 @@ import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,13 +27,11 @@ import com.albany.foodOnWheels.model.FoodTruckOwner;
 import com.albany.foodOnWheels.model.Menu;
 import com.albany.foodOnWheels.model.User;
 import com.services.Connection;
-import com.services.ImageUpload;
 
 import java.io.PrintWriter;
 import java.net.URL;
 
 @WebServlet({ "/ProfileImageUploaderServlet", "/ProfileImageUploaderServlet.do" })
-@MultipartConfig
 public class ProfileImageUploaderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private String directory;
@@ -49,37 +46,98 @@ public class ProfileImageUploaderServlet extends HttpServlet {
 	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, java.io.IOException {
-		
-		String fileName = ImageUpload.imageUpload(request);
-		
-		HttpSession httpSession = request.getSession();
-		String truckowner = (String) httpSession.getAttribute("user_name");
-	    SessionFactory sessionFactory = Connection.getSessionFactory();
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
-		
-		List<FoodTruckOwner> list = session.createCriteria(FoodTruckOwner.class)
-				.add(Restrictions.eq("truck_name", truckowner)).list();
-		
-		
-			FoodTruckOwner foodtruckowner = list.get(0);
-			foodtruckowner.setImage_path(fileName);
-			session.update(foodtruckowner);
-			session.getTransaction().commit();
-		 
-		request.setAttribute("message", "Image added successfully");
-		request.setAttribute("fileName", fileName);
-		System.out.println(fileName);
+
+		try {
+
+			String cuisine = request.getParameter("cuisinename");
+			System.out.println(cuisine);
+			HttpSession httpSession = request.getSession();
+			String truckowner = (String) httpSession.getAttribute("user_name");
+
+			directory = request.getSession().getServletContext().getRealPath("/") + "images\\";
+			System.out.println("menu upload" + directory);
+			ServletFileUpload.isMultipartContent(request);
+			response.setContentType("image");
+
+			PrintWriter out = response.getWriter();
+			DiskFileItemFactory factory = new DiskFileItemFactory();
+			factory.setSizeThreshold(maxMemSize);
+			// factory.setRepository(new File("c:\\temp"));
+
+			ServletFileUpload upload = new ServletFileUpload(factory);
+			upload.setSizeMax(maxFileSize);
+			String filepath = "";
+			String fileName = "";
+			List<FileItem> fileItems = upload.parseRequest(request);
+			Iterator<FileItem> i = fileItems.iterator();
+			while (i.hasNext()) {
+				FileItem fi = (FileItem) i.next();
+				if (!fi.isFormField()) {
+					fileName = fi.getName();
+					
+					System.out.println(fileName);
+					System.out.println("file apth" + filepath);
+					if (fileName.lastIndexOf("\\") >= 0) {
+						fileName = fileName.substring(fileName.lastIndexOf("\\"));
+						file = new File(directory + fileName);
+					} else {
+						fileName = fileName.substring(fileName.lastIndexOf("\\") + 1);
+						file = new File(directory + fileName);
+					}
+					fi.write(file);
+
+				}
+
+			}
+			SessionFactory sessionFactory = Connection.getSessionFactory();
+			Session session = sessionFactory.openSession();
+			Transaction tx = null;
+			tx = session.beginTransaction();
+			List<User> userList = session.createCriteria(User.class)
+					.add(Restrictions.eq("user_name", truckowner))
+					.list();
+			User loggedin=  userList.get(0);
+			tx.commit();
+			
+			request.setAttribute("user", loggedin);
+			
+			FoodTruckOwner truck_owner= new FoodTruckOwner();
+			session = sessionFactory.openSession();
+			tx = session.beginTransaction();
+			List<FoodTruckOwner> foodTruckOwnerList = session.createCriteria(FoodTruckOwner.class).list();
+			for(FoodTruckOwner foodtruckowner : foodTruckOwnerList) {
+				//System.out.println(foodtruckowner.getUser().getUser_name());
+				if(foodtruckowner.getUser().getUser_name().equals(loggedin.getUser_name())) {
+					System.out.println("truck find");
+					truck_owner = foodtruckowner;
+				}
+			}
+			System.out.println(directory + "1");
+			System.out.println(filepath + "2");
+			System.out.println(fileName +  "3");
+			truck_owner.setImage_path(fileName);
+			tx.commit();
+			
+			request.setAttribute("msg", "Your image is updated successfully!");
+			request.setAttribute("truck", truck_owner);
+			request.setAttribute("cuisine", truck_owner.getCuisine());
+			request.setAttribute("days", truck_owner.getDays());
+			request.setAttribute("payments", truck_owner.getAccepted_payments());
+			request.setAttribute("fileName", fileName);
+			doGet(request, response);
+
+		} catch (Exception ex) {
+			System.out.println(ex);
+			ex.printStackTrace();
+		}
+
+	}
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, java.io.IOException {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsps/profile-truckowner.jsp");
 		dispatcher.forward(request, response);
 		return;
-
-	} 
-
-
-public void doGet(HttpServletRequest request, HttpServletResponse response)
-		throws ServletException, java.io.IOException {
-
-}
+	}
 
 }
