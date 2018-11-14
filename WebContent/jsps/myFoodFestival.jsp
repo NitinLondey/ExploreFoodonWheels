@@ -114,7 +114,7 @@ h2 {
 
       <h3 class="hdr1">My Food Festival</h3>
 		
-      <div class="easyBox full">
+    
       <div class="row nomargin">
 		<table class="table-bordered" id="requesttable">
 			<tr>
@@ -154,7 +154,7 @@ h2 {
       <!-- / easyBox -->
 
     </div>
-  </div>
+ 
 </div>
 
 
