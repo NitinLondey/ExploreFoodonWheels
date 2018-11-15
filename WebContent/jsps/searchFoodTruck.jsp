@@ -92,7 +92,8 @@
 			WeekEnds  : <c:out value="${foodTruck.weekend_time}" /><br/>
 			
 			
-			Open Menu <input type ="button" value="View Truck " onclick="location.href='${pageContext.request.contextPath}/HomePage?truckname=${foodTruck.truck_name}'"/>
+			Open Menu <input type ="button" value="View Truck Menu" onclick="location.href='${pageContext.request.contextPath}/AddMenu.do?truckname=${foodTruck.truck_name}'"/>
+			Open Events <input type ="button" value="View Truck Events" onclick="location.href='${pageContext.request.contextPath}/showFoodFestivals?truckname=${foodTruck.truck_name}'"/>
 			</p>
 			</div>
 			

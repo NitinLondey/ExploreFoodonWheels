@@ -41,7 +41,19 @@ public class showFoodFestivals extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession httpSession = request.getSession();
+		
+		
 		String user_name = (String) httpSession.getAttribute("user_name");
+		if(request.getParameter("truckname") != null) {
+			user_name =  request.getParameter("truckname");
+			String role = (String)httpSession.getAttribute("role");
+			if(role == "user") {
+				httpSession.setAttribute("isUser", "user");
+			}
+		}
+		else {
+			httpSession.setAttribute("isUser", "truck");
+		}
 		Session session = null;
 		Transaction tx = null;
 		SessionFactory sessionFactory = Connection.getSessionFactory();
@@ -52,7 +64,9 @@ public class showFoodFestivals extends HttpServlet {
 			List<FoodFestival> festivalList = session.createCriteria(FoodFestival.class)
 					.add(Restrictions.eq("truck_name", user_name))
 					.list();
-			System.out.println("food festival "+festivalList.size());
+			if(request.getParameter("truckname") != null) {
+				festivalList.removeIf(s -> s.getApproved().equals("rejected") || s.getApproved().equals("processing") );
+			}
 			request.setAttribute("list", festivalList);
 			RequestDispatcher rd = request.getRequestDispatcher("/jsps/myFoodFestival.jsp");
 			rd.forward(request, response);

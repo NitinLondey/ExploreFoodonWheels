@@ -44,10 +44,21 @@ public class AddMenu extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, java.io.IOException {
-
-
+		
 		HttpSession httpSession = request.getSession();
 		String truckowner = (String) httpSession.getAttribute("user_name");
+		
+		if(request.getParameter("truckname") != null) {
+			truckowner =  request.getParameter("truckname");
+			httpSession.setAttribute("truckname", truckowner);
+			String role = (String)httpSession.getAttribute("role");
+			if(role == "user") {
+				httpSession.setAttribute("isUser", "user");
+			}
+		}
+		else {
+			httpSession.setAttribute("isUser", "truck");
+		}
 		
 		Session session = null;
 		Transaction tx = null;
@@ -76,7 +87,7 @@ public class AddMenu extends HttpServlet {
 				request.setAttribute("count", lengthoflist);
 				System.out.println("**************************");
 				String fileName="";
-;
+
 				List<Menu> menudetails = session.createCriteria(Menu.class)
 						.add(Restrictions.eq("truck_name", truckowner)).list();
 				for (Menu m : menudetails) {

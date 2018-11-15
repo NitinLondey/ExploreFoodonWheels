@@ -119,18 +119,25 @@
 								src="${pageContext.request.contextPath}/uploads/${fileName}">
 						</p>
 
-
+	<%
+	if ( request.getSession().getAttribute("role").equals("truck_owner")) {
+			
+			
+		
+	%>
+	
+	
 						<form class="formdata"
 							action="${pageContext.request.contextPath}/ImageUploaderServlet.do"
 							method="post" enctype="multipart/form-data" id="menuadd">
 
-
 							<input id="hidden" type="hidden" name="cuisinename"
-								value="${list}" /> <input class="choosefilebtn" id="file"
+								value="${list}" /> 
+							<input class="choosefilebtn" id="file"
 								type="file" name="file" size="50" onchange="onSubmit(event);" />
 							<input class="submitfilebtn" type="submit" value="Upload File" />
 						</form>
-
+<% } %>
 					</div>
 
 				</div>

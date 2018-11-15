@@ -126,8 +126,12 @@ h2 {
 				<th>City</th>
 				<th>State</th>																		
 				<th>Zipcode</th>
+				<%
+					if ( request.getSession().getAttribute("role").equals("truck_owner")) {
+				%>
 				<th>Status</th>
 				<th>Action</th>
+				<% } %>
 			</tr>
 
 			<c:forEach var="list" items="${list}">
@@ -140,11 +144,13 @@ h2 {
 					<td><c:out value="${list.city}" /></td>
 					<td><c:out value="${list.state}" /></td>
 					<td><c:out value="${list.zip_code}" /></td>
+					<%
+					if ( request.getSession().getAttribute("role").equals("truck_owner")) {
+					%>
+					
 					<td><c:out value="${list.approved}" /></td>
-					<!-- <td><input type="button" value="Approve" onclick="getParam();"></td> -->
-
-				<td><input type="button" value="Delete" style="background:red" onclick="location.href='${pageContext.request.contextPath}/deleteFestival.do?eventId=<c:out value="${list.id}"/>'"></td>
-				
+					<td><input type="button" value="Delete" style="background:red" onclick="location.href='${pageContext.request.contextPath}/deleteFestival.do?eventId=<c:out value="${list.id}"/>'"></td>
+				<% } %>
 				</tr>
 			</c:forEach>
 		</table>
