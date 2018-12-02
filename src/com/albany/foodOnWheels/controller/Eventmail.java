@@ -89,7 +89,7 @@ public class Eventmail extends HttpServlet {
 					System.out.println("email id not correct");
 				}
 				else {
-	//			es.send(fto.getEmail(),approve, "event");
+				es.send(fto.getEmail(),approve, "event");
 			
 				}
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ViewEventsServlet");

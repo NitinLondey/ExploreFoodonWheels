@@ -92,7 +92,7 @@ public class EmailServlet extends HttpServlet {
 				System.out.println("email id not correct");
 				}
 				else {
-		//		es.send(u1.getEmail(),approve, "foodtruck");
+				es.send(u1.getEmail(),approve, "foodtruck");
 					System.out.println("email sent successfully");
 				//es.send(fto.getEmail(),approve, "event");
 				}
