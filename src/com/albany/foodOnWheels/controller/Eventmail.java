@@ -43,8 +43,8 @@ public class Eventmail extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		System.out.println("inside email servlet");
-	String eventid=request.getParameter("event_id");
-//	int i=Integer.parseInt(eventid);
+		String eventid=request.getParameter("event_id");
+//		int i=Integer.parseInt(eventid);
 		System.out.println(eventid);
 		Session session = null;
 		Transaction tx = null;
@@ -56,10 +56,7 @@ public class Eventmail extends HttpServlet {
 			}else {
 				approve =request.getParameter("approval");
 			}
-			
-				
-			
-			
+
 			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
 			HttpSession httpsession = request.getSession();
@@ -82,8 +79,6 @@ public class Eventmail extends HttpServlet {
 				session.update(e1);
 				tx.commit();
 				
-				
-			
 				tx = session.beginTransaction();
 				List<User> user = session.createCriteria(User.class)
 						.add(Restrictions.eq("user_name", truckname)).list();
@@ -94,7 +89,7 @@ public class Eventmail extends HttpServlet {
 					System.out.println("email id not correct");
 				}
 				else {
-				es.send(fto.getEmail(),approve, "event");
+	//			es.send(fto.getEmail(),approve, "event");
 			
 				}
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ViewEventsServlet");

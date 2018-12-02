@@ -17,6 +17,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import com.albany.foodOnWheels.model.FoodFestival;
 import com.albany.foodOnWheels.model.FoodTruckOwner;
 import com.albany.foodOnWheels.model.User;
 import com.services.Connection;
@@ -38,60 +39,68 @@ public class EmailServlet extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 *///	@SuppressWarnings("unchecked")
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		System.out.println("inside email servlet");
 		String user=request.getParameter("user_name");
+//		int i=Integer.parseInt(eventid);
+		System.out.println(user);
 		Session session = null;
 		Transaction tx = null;
 		SessionFactory sessionFactory = Connection.getSessionFactory();
 		try {
-
+			String approve=null;
+			if(request.getParameter("approval")==null) {
+				approve =request.getParameter("reject");
+			}else {
+				approve =request.getParameter("approval");
+			}
+			
 			session = sessionFactory.openSession();
 			tx = session.beginTransaction();
 			HttpSession httpsession = request.getSession();
-			String role = (String) httpsession.getAttribute("role");
+			//String ok="";
 			
+				List<FoodTruckOwner> ftlist=session.createCriteria(FoodTruckOwner.class)
+					.add(Restrictions.eq("truck_name", user)).list();
+				
+				FoodTruckOwner foodtruckown=ftlist.get(0);
+				if(approve.equals("true"))
+				{
+					foodtruckown.setApproved(true);System.out.println("owner Accepted");
+				}
+				else
+				{
+					System.out.println("owner rejected");
+					foodtruckown.setApproved(false); System.out.println("Rejected");
+				}
+				//EmailService es=new EmailService(); System.out.println(u1.getEmail());//	String currentstatus="";
+				String truckname=foodtruckown.getTruck_name();
+				session.update(foodtruckown);
+				tx.commit();
+				
+				tx = session.beginTransaction();
 				List<User> userlist = session.createCriteria(User.class)
-						.add(Restrictions.eq("user_name", user)).list();
-				
+					.add(Restrictions.eq("user_name", user)).list();
 				User u1=userlist.get(0);	
-				EmailService es=new EmailService();
-				System.out.println(u1.getEmail());
-				String currentstatus="";
-				String approve =request.getParameter("approval");	
-				
-				if(approve.equals("approved")){
-						currentstatus="Approved";
-					}
-					else {
-						currentstatus="Rejected";
-					}
+				EmailService es=new EmailService(); System.out.println(u1.getEmail());//	String currentstatus="";
+
 				String s[]=u1.getEmail().split("@");
 				if(!s[1].equals("gmail.com")) {
-					System.out.println("email id not correct");
+				System.out.println("email id not correct");
 				}
 				else {
-				es.send(u1.getEmail(),approve, "foodtruck");
-			
-				
-			/*	
-			List<FoodTruckOwner> foodTruckOwner = session.createCriteria(FoodTruckOwner.class)
-						.add(Restrictions.eq("u1", user)).list();
-			FoodTruckOwner ft=foodTruckOwner.get(0);
-			ft.setApproved(true);
-			session.save(ft);
-			session.close();
-			tx.commit();
-			RequestDispatcher rd = request.getRequestDispatcher("/jsps/admin_request.jsp");
-			rd.forward(request, response);*/
-
-				
+		//		es.send(u1.getEmail(),approve, "foodtruck");
+					System.out.println("email sent successfully");
+				//es.send(fto.getEmail(),approve, "event");
 				}
-				
+				session.update(u1);
+				tx.commit();
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/Request_center");
+				dispatcher.forward(request, response);
+					
 		}
 		catch (Exception e) {
 			tx.rollback();
@@ -102,4 +111,14 @@ public class EmailServlet extends HttpServlet {
 		}
 	
 	}
+	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
 }
+

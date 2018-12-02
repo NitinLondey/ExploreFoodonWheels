@@ -101,14 +101,33 @@ body {
 	background-color: #4CAF50;
 	color: black;
 }
-
-h2 {
+ok{
+color: Crimson ;
+}
+h5 {
     text-align: center;
+    color: Red;
 }
-a{
-	color: (internal value);
-    text-decoration: underline;
+h6 {
+    text-align: center;
+    
 }
+
+a:link {
+    color: green;
+}
+
+/* visited link */
+a:visited {
+    color: green;
+}
+
+/* mouse over link */
+a:hover {
+    color: hotpink;
+}
+
+
 
 </style>
 
@@ -123,39 +142,39 @@ a{
 	<div class="">
 
 		<table class="table-bordered" id="requesttable">
-			<tr>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Phone Number</th>				
-				<th>Cuisine</th>
-				<th>Days</th>
-				<th>Weekday Time</th>
-				<th>Weekend Time</th>																		
-				<th>Approve</th>
-				<th>Reject</th>
-				<th>Status</th>
+			<tr align="center">
+				<th><h6 style="color:Cyan ;">Name</h6></th>
+				<th><h6 style="color:Cyan ;">Email</h6></th>
+				<th><h6 style="color:Cyan ;">Phone Number</h6></th>				
+				<th><h6 style="color:Cyan ;">Cuisine</h6></th>
+				<th><h6 style="color:Cyan ;">Days</h6></th>
+				<!-- <th><h5>Weekday Time</h5></th>
+				<th><h5>Weekend Time</h5></th>	 -->																	
+				<th><h6 style="color:Cyan ;">Approved?</h6></th>
+				<th><h6 style="color:Cyan ;">Approve</h6></th>
+				<th><h6 style="color:Cyan ;">Reject</h6></th>
 
 			</tr>
 
 			<c:forEach var="list" items="${list}">
-				<tr>
+				<tr align="center">
 					<td><c:out value="${list.truck_name}" /></td>
 					<td><c:out value="${list.user.email}" /></td>
 					<td><c:out value="${list.phone}" /></td>
 					<td><c:out value="${list.cuisine}" /></td>
 					<td><c:out value="${list.days}" /></td>
-					<td><c:out value="${list.weekday_time}" /></td>
-					<td><c:out value="${list.weekend_time}" /></td>
+					<%-- <td><c:out value="${list.weekday_time}" /></td>
+					<td><c:out value="${list.weekend_time}" /></td> --%>
+					<td><h5 style="color:Black;"><c:out value="${list.approved}" /></h5></td>
 					<!-- <td><input type="button" value="Approve" onclick="getParam();"></td> -->
 
 
-				<td><a
-						href="${pageContext.request.contextPath}/EmailServlet.do?user_name=<c:out value="${list.user.user_name}"/>&approval=approved ">Approve</a></td>
-
-
 					<td><a
-						href="${pageContext.request.contextPath}/EmailServlet.do?user_name=<c:out value="${list.user.user_name}"/>&reject=rejected ">Reject</a></td>
-					<td><c:out value="${list.approved}" /></td>
+						href="${pageContext.request.contextPath}/EmailServlet.do?user_name=<c:out value="${list.user.user_name}"/>&approval=approved ">Approve</a></td>
+					<td><a
+						href="${pageContext.request.contextPath}/EmailServlet.do?user_name=<c:out value="${list.user.user_name}"/>&reject=rejected">Reject</a></td>
+				
+				
 				</tr>
 			</c:forEach>
 		</table>

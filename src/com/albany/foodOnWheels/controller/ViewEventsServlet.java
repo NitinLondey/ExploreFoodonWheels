@@ -62,9 +62,6 @@ public class ViewEventsServlet extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/jsps/eventCenter.jsp");
 				rd.forward(request, response);
 
-			
-
-			
 
 		} catch (Exception e) {
 			tx.rollback();
