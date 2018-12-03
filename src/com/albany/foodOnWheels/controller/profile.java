@@ -42,6 +42,7 @@ public class profile extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession httpSession = request.getSession();
 		String user_name = (String) httpSession.getAttribute("user_name");
+		System.out.println(user_name);
 		String role = (String) httpSession.getAttribute("role");
 		Session session = null;
 		Transaction tx = null;
