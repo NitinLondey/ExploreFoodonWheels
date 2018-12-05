@@ -39,8 +39,9 @@ public class FoodTruckOwner {
 	@Column(name="weekend_time", length=200)
 	private String weekend_time;
 	
+	
 	@Column(name="approved")
-	private boolean approved;
+	private String approved;
 	
 	@Column(name="accepted_payment", length=200)
 	private String accepted_payments;
@@ -133,10 +134,10 @@ public class FoodTruckOwner {
 	public void setWeekend_time(String weekend_time) {
 		this.weekend_time = weekend_time;
 	}
-	public boolean isApproved() {
+	public String getApproved() {
 		return approved;
 	}
-	public void setApproved(boolean approved) {
+	public void setApproved(String approved) {
 		this.approved = approved;
 	}
 	public String getAccepted_payments() {

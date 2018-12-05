@@ -54,7 +54,7 @@ public class RequestAdmin extends HttpServlet {
 	//		String role = (String) httpsession.getAttribute("role");
 			
 				List<FoodTruckOwner> truckowner = session.createCriteria(FoodTruckOwner.class)
-						.add(Restrictions.or(Restrictions.eq("approved", false),Restrictions.eq("approved", true)))
+						.add(Restrictions.or(Restrictions.eq("approved", "approved"),Restrictions.eq("approved", "Pending")))
 						.list();
 				
 			/*	List<FoodFestival> truckowner = session.createCriteria(FoodFestival.class)

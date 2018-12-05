@@ -67,15 +67,17 @@ public class EmailServlet extends HttpServlet {
 					.add(Restrictions.eq("truck_name", user)).list();
 				
 				FoodTruckOwner foodtruckown=ftlist.get(0);
-				if(approve.equals("true"))
-				{
-					foodtruckown.setApproved(true);System.out.println("owner Accepted");
+				
+				if(approve.equals("approved")){
+					foodtruckown.setApproved("approved");
 				}
-				else
-				{
-					System.out.println("owner rejected");
-					foodtruckown.setApproved(false); System.out.println("Rejected");
+				else {
+					System.out.println("event rejected");
+					foodtruckown.setApproved("rejected");
 				}
+				
+				
+				
 				//EmailService es=new EmailService(); System.out.println(u1.getEmail());//	String currentstatus="";
 				String truckname=foodtruckown.getTruck_name();
 				session.update(foodtruckown);

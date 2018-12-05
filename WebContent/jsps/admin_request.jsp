@@ -101,9 +101,14 @@ body {
 	background-color: #4CAF50;
 	color: black;
 }
-ok{
-color: Crimson ;
+okgreen{
+outline: 2px solid green;
 }
+
+okred{
+outline: 2px solid red;
+}
+
 h5 {
     text-align: center;
     color: Red;
@@ -115,18 +120,22 @@ h6 {
 
 a:link {
     color: green;
+    
 }
 
 /* visited link */
 a:visited {
     color: green;
+      
+    
 }
 
 /* mouse over link */
 a:hover {
     color: hotpink;
+       
+    
 }
-
 
 
 </style>
@@ -150,7 +159,7 @@ a:hover {
 				<th><h6 style="color:Cyan ;">Days</h6></th>
 				<!-- <th><h5>Weekday Time</h5></th>
 				<th><h5>Weekend Time</h5></th>	 -->																	
-				<th><h6 style="color:Cyan ;">Approved?</h6></th>
+				<th><h6 style="color:Cyan ;">Status</h6></th>
 				<th><h6 style="color:Cyan ;">Approve</h6></th>
 				<th><h6 style="color:Cyan ;">Reject</h6></th>
 
@@ -169,10 +178,10 @@ a:hover {
 					<!-- <td><input type="button" value="Approve" onclick="getParam();"></td> -->
 
 
-					<td><a
-						href="${pageContext.request.contextPath}/EmailServlet.do?user_name=<c:out value="${list.user.user_name}"/>&approval=approved ">Approve</a></td>
-					<td><a
-						href="${pageContext.request.contextPath}/EmailServlet.do?user_name=<c:out value="${list.user.user_name}"/>&reject=rejected">Reject</a></td>
+					<td><okgreen><a
+						href="${pageContext.request.contextPath}/EmailServlet.do?user_name=<c:out value="${list.user.user_name}"/>&approval=approved ">Approve</a></okgreen></td>
+					<td><okred><a 
+						href="${pageContext.request.contextPath}/EmailServlet.do?user_name=<c:out value="${list.user.user_name}"/>&reject=rejected">Reject</a></okred></td>
 				
 				
 				</tr>

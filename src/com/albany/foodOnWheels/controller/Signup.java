@@ -74,7 +74,7 @@ public class Signup extends HttpServlet {
 			String[] payment = request.getParameterValues("payment");
 			
 			truck_owner.setAccepted_payments(String.join(",",payment ));
-			truck_owner.setApproved(false);
+			truck_owner.setApproved("Pending");
 			truck_owner.setIs_moving(false);
 			truck_owner.setAddress_line_1(request.getParameter("address1"));
 			truck_owner.setAddress_line_2(request.getParameter("address2"));
