@@ -94,6 +94,8 @@
 			
 			Open Menu <input type ="button" value="View Truck Menu" onclick="location.href='${pageContext.request.contextPath}/AddMenu.do?truckname=${foodTruck.truck_name}'"/>
 			Open Events <input type ="button" value="View Truck Events" onclick="location.href='${pageContext.request.contextPath}/showFoodFestivals?truckname=${foodTruck.truck_name}'"/>
+						Open Reviews <input type ="button" value="Reviews" onclick="location.href='${pageContext.request.contextPath}/AddReview.do?truckname=${foodTruck.truck_name}'"/>
+			
 			</p>
 			</div>
 			
