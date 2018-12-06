@@ -54,7 +54,7 @@ public class AddEventsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		String fileName = ImageUpload.imageUpload(request);
+		//String fileName = ImageUpload.imageUpload(request);
 		
 		HttpSession httpSession = request.getSession();
 		
@@ -92,7 +92,7 @@ public class AddEventsServlet extends HttpServlet {
 		foodfestival.setHours(request.getParameter("hours"));
 		foodfestival.setCity(request.getParameter("city"));
 		foodfestival.setState(request.getParameter("state"));
-		foodfestival.setImage_path(fileName);
+		foodfestival.setImage_path(null);
 		foodfestival.setZip_code(Integer.parseInt(request.getParameter("zipcode")));
 		foodfestival.setApproved("processing");
 		

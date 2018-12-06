@@ -93,16 +93,16 @@
         <div class="row nomargin">
          
           		
-				<div class="frameImg">
+				<!-- <div class="frameImg">
 					<img id="imgs" class="menuimages"
 						src="">
-				</div>
-				<h6>Upload a image for your food festival here!</h6>
+				</div> -->
+				<%-- <h6>Upload a image for your food festival here!</h6>
 				
 					<input id="hidden" type="hidden" name="eventId" value="${eventId}" />
 
 					<input class="choosefilebtn" id="file" type="file" name="file"
-						size="50" onchange="onSubmit(event);" /> 
+						size="50" onchange="onSubmit(event);" /> --%> 
 			  <input class="btn btn-default" type="submit" value="Submit"/>
 
 			

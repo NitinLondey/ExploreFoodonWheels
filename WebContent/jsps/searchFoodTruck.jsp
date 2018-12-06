@@ -72,7 +72,7 @@
           			<img src="${pageContext.request.contextPath}/images/demo-content/product-1.jpg" alt=" ">
           		</c:when>
           		<c:otherwise>
-          		<img src="${pageContext.request.contextPath}/images/${foodTruck.image_path}" alt=" ">
+          		<img src="${pageContext.request.contextPath}/uploads/${foodTruck.image_path}" alt=" ">
           		</c:otherwise>
           		</c:choose>
           		</div>
