@@ -14,8 +14,8 @@ import com.albany.foodOnWheels.model.User;
 
 public class EmailService {
 	
-	final String username = "callteam68@gmail.com";
-	final String password = "Team3Admin123";
+	final String username = "";
+	final String password = "";
 
 	public EmailService() {
 
